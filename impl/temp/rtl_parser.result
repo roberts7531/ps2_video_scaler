@@ -1,0 +1,20 @@
+[
+ {
+  "InstFile" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/fifo_hs/ps2_fifo.v",
+  "InstLine" : 818,
+  "InstName" : "ps2_fifo",
+  "ModuleFile" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/fifo_hs/ps2_fifo.v",
+  "ModuleLine" : 818,
+  "ModuleName" : "ps2_fifo",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/fifo_hs/ps2_fifo.v",
+    "InstLine" : 847,
+    "InstName" : "fifo_inst",
+    "ModuleFile" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/fifo_hs/ps2_fifo.v",
+    "ModuleLine" : 10,
+    "ModuleName" : "~fifo.ps2_fifo"
+   }
+  ]
+ }
+]

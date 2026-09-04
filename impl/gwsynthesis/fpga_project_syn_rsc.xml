@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="scaler_top" Register="62" Alu="53" Lut="27" Bsram="1" T_Register="699(62)" T_Alu="79(53)" T_Lut="627(27)" T_Bsram="45(1)">
+ <SubModule name="gw_gao_inst_0" Register="591" Alu="16" Lut="535" Bsram="43" T_Register="591(591)" T_Alu="16(16)" T_Lut="535(535)" T_Bsram="43(43)"/>
+ <SubModule name="lcd_pll"/>
+ <SubModule name="line_fifo" Register="46" Alu="10" Lut="65" Bsram="1" T_Register="46(46)" T_Alu="10(10)" T_Lut="65(65)" T_Bsram="1(1)"/>
+</Module>

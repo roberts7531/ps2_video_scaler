@@ -1,0 +1,33 @@
+{
+ "Device" : "GW2AR-18C",
+ "Files" : [
+  {
+   "Path" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/scaler_top.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/gowin_rpll/pll_lcd.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/fifo_hs/ps2_fifo.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/sdram_interface.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/sdram_controller_hs/sdram_controller_hs.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/impl/temp/rtl_parser.result",
+ "Top" : "",
+ "VerilogStd" : "sysv",
+ "VhdlStd" : "vhdl_93"
+}

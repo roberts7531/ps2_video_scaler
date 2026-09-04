@@ -1,0 +1,96 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v'
+WARN  (EX2830) : Data object 'video_de' is already declared("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":234)
+Previous declaration of 'video_de' is from here("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":230)
+WARN  (EX3671) : Second declaration of 'video_de' is ignored("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":234)
+WARN  (EX2830) : Data object 'pixel_x' is already declared("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":235)
+Previous declaration of 'pixel_x' is from here("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":231)
+WARN  (EX3671) : Second declaration of 'pixel_x' is ignored("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":235)
+WARN  (EX2830) : Data object 'pixel_y' is already declared("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":236)
+Previous declaration of 'pixel_y' is from here("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":232)
+WARN  (EX3671) : Second declaration of 'pixel_y' is ignored("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":236)
+Undeclared symbol 'RdClk', assumed default net type 'wire'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":247)
+Undeclared symbol 'RdEn', assumed default net type 'wire'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":249)
+Undeclared symbol 'Q', assumed default net type 'wire'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":250)
+Undeclared symbol 'Empty', assumed default net type 'wire'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":251)
+Undeclared symbol 'Full', assumed default net type 'wire'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":252)
+Analyzing Verilog file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\gowin_rpll\pll_lcd.v'
+Analyzing Verilog file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\fifo_hs\ps2_fifo.v'
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_crc32.v'
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'
+Analyzing included file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Analyzing included file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Analyzing included file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_init.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v'
+Analyzing included file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'
+Analyzing included file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_top_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_expression.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_parameter.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing included file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\ao_0\gw_ao_init.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'
+Analyzing included file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\ao_control\gw_con_top_define.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Analyzing included file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\ao_control\gw_con_parameter.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Back to file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Analyzing Verilog file 'C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\gw_jtag.v'
+Analyzing Verilog file 'C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\gw_gao_top.v'
+Compiling module 'scaler_top'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":1)
+Extracting RAM for identifier 'vram'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":129)
+Extracting RAM for identifier 'line_ram'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":237)
+WARN  (EX3791) : Expression size 5 truncated to fit in target size 4("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":54)
+Compiling module 'pll_lcd'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\gowin_rpll\pll_lcd.v":10)
+WARN  (EX3791) : Expression size 11 truncated to fit in target size 10("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":164)
+WARN  (EX3791) : Expression size 12 truncated to fit in target size 11("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":167)
+Compiling module 'ps2_line_fifo'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\fifo_hs\ps2_fifo.v":383)
+Compiling module '**'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\fifo_hs\ps2_fifo.v":382)
+WARN  (EX3670) : Actual bit length 1 differs from formal bit length 18 for port 'Q'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":250)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 11("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":275)
+WARN  (EX1998) : Net 'RdClk' does not have a driver("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":247)
+WARN  (EX1998) : Net 'RdEn' does not have a driver("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":249)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_crc32.v":74)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_match.v":374)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Extracting RAM for identifier '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_mem_ctrl.v":1256)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_AO_0\gw_ao_top.v":3042)
+Compiling module '**'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\GAO\GW_CON\gw_con_top.v":377)
+Compiling module 'GW_JTAG'("C:\Gowin\Gowin_V1.9.12_x64\IDE\data\ipcores\gw_jtag.v":1)
+Compiling module 'gw_gao'("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\RTL_GAO\gw_gao_top.v":1)
+Trying to combine GAO to RTL design
+NOTE  (EX0101) : Current top module is "scaler_top"
+WARN  (EX0211) : The output port "LCD_HSYNC" of module "scaler_top" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":21)
+WARN  (EX0211) : The output port "LCD_VSYNC" of module "scaler_top" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":22)
+WARN  (EX0211) : The output port "SPI_MISO" of module "scaler_top" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":31)
+[5%] Running netlist conversion ...
+WARN  (CV0016) : Input SPI_CS is unused("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":28)
+WARN  (CV0016) : Input SPI_CLK is unused("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":29)
+WARN  (CV0016) : Input SPI_MOSI is unused("C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\scaler_top.v":30)
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+[95%] Generate netlist file "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\fpga_project.vg" completed
+[100%] Generate report file "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\fpga_project_syn.rpt.html" completed
+GowinSynthesis finish

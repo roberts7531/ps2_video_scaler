@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="ps2_fifo" Register="138" Alu="32" Lut="104" Bsram="1" T_Register="138(138)" T_Alu="32(32)" T_Lut="104(104)" T_Bsram="1(1)"/>

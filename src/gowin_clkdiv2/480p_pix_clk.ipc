@@ -1,0 +1,10 @@
+[General]
+ipc_version=4
+file=480p_pix_clk
+module=pix_clk_480p
+target_device=gw2ar18c-000
+type=clock_clkdiv2
+version=1.0
+
+[Config]
+Language=0
