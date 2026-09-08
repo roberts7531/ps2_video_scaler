@@ -1,19 +1,23 @@
-Reading netlist file: "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\fpga_project.vg"
-Parsing netlist file "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\fpga_project.vg" completed
+Reading netlist file: "/home/roberts7531/ps2_video_scaler/impl/gwsynthesis/fpga_project.vg"
+Parsing netlist file "/home/roberts7531/ps2_video_scaler/impl/gwsynthesis/fpga_project.vg" completed
 Processing netlist completed
-Reading constraint file: "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\fpga_project.cst"
+Reading constraint file: "/home/roberts7531/ps2_video_scaler/src/fpga_project.cst"
 Physical Constraint parsed completed
 Running placement......
 [10%] Placement Phase 0 completed
 [20%] Placement Phase 1 completed
 [30%] Placement Phase 2 completed
-WARN  (TA1132) :  'PS2_PCLK' was determined to be a clock but was not created.
-WARN  (TA1132) :  'tck_pad_i' was determined to be a clock but was not created.
+WARN  (TA1117) : Can't calculate clocks' relationship between: "SPI_CLK" and "lcd_pll/rpll_inst/CLKOUT.default_gen_clk"
+WARN  (TA1117) : Can't calculate clocks' relationship between: "sdr_pll/rpll_inst/CLKOUT.default_gen_clk" and "PS2_PCLK"
+WARN  (TA1117) : Can't calculate clocks' relationship between: "tck_pad_i" and "sdr_pll/rpll_inst/CLKOUT.default_gen_clk"
+WARN  (TA1117) : Can't calculate clocks' relationship between: "sdr_pll/rpll_inst/CLKOUT.default_gen_clk" and "tck_pad_i"
+WARN  (TA1117) : Can't calculate clocks' relationship between: "PS2_PCLK" and "sdr_pll/rpll_inst/CLKOUT.default_gen_clk"
 [50%] Placement Phase 3 completed
 Running routing......
 [60%] Routing Phase 0 completed
 [70%] Routing Phase 1 completed
 [80%] Routing Phase 2 completed
+WARN  (PR1014) : Generic routing resource will be used to clock signal 'SPI_CLK_d' by the specified constraint. And then it may lead to the excessive delay or skew
 WARN  (PR1014) : Generic routing resource will be used to clock signal 'clk27_d' by the specified constraint. And then it may lead to the excessive delay or skew
 [90%] Routing Phase 3 completed
 Running timing analysis......
@@ -23,10 +27,10 @@ Bitstream generation in progress......
 Bitstream generation completed
 Running power analysis......
 [100%] Power analysis completed
-Generate file "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\pnr\fpga_project.power.html" completed
-Generate file "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\pnr\fpga_project.pin.html" completed
-Generate file "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\pnr\fpga_project.rpt.html" completed
-Generate file "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\pnr\fpga_project.rpt.txt" completed
-Generate file "C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\pnr\fpga_project.tr.html" completed
-Fri Sep  4 13:40:39 2026
+Generate file "/home/roberts7531/ps2_video_scaler/impl/pnr/fpga_project.power.html" completed
+Generate file "/home/roberts7531/ps2_video_scaler/impl/pnr/fpga_project.pin.html" completed
+Generate file "/home/roberts7531/ps2_video_scaler/impl/pnr/fpga_project.rpt.html" completed
+Generate file "/home/roberts7531/ps2_video_scaler/impl/pnr/fpga_project.rpt.txt" completed
+Generate file "/home/roberts7531/ps2_video_scaler/impl/pnr/fpga_project.tr.html" completed
+Tue Sep  8 21:44:58 2026
 

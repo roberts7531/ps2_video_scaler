@@ -1,19 +1,71 @@
 [
  {
-  "InstFile" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/fifo_hs/ps2_fifo.v",
-  "InstLine" : 818,
-  "InstName" : "ps2_fifo",
-  "ModuleFile" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/fifo_hs/ps2_fifo.v",
-  "ModuleLine" : 818,
-  "ModuleName" : "ps2_fifo",
+  "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+  "InstLine" : 1,
+  "InstName" : "scaler_top",
+  "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+  "ModuleLine" : 1,
+  "ModuleName" : "scaler_top",
   "SubInsts" : [
    {
-    "InstFile" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/fifo_hs/ps2_fifo.v",
-    "InstLine" : 847,
-    "InstName" : "fifo_inst",
-    "ModuleFile" : "C:/Users/Roberts/Documents/ps2portable/fpga_video_scaler/fpga_code/fpga_project/src/fifo_hs/ps2_fifo.v",
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 155,
+    "InstName" : "lcd_pll",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_rpll/pll_lcd.v",
     "ModuleLine" : 10,
-    "ModuleName" : "~fifo.ps2_fifo"
+    "ModuleName" : "pll_lcd"
+   },
+   {
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 283,
+    "InstName" : "sdr_pll",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_pll/sdram_pll.v",
+    "ModuleLine" : 10,
+    "ModuleName" : "sdram_pll"
+   },
+   {
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 295,
+    "InstName" : "screen_line",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v",
+    "ModuleLine" : 10,
+    "ModuleName" : "screen_line"
+   },
+   {
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 319,
+    "InstName" : "sdr_interface",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv",
+    "ModuleLine" : 1,
+    "ModuleName" : "sdram_interface",
+    "SubInsts" : [
+     {
+      "InstFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv",
+      "InstLine" : 49,
+      "InstName" : "sdrc",
+      "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_controller_hs/sdram_controller_hs.v",
+      "ModuleLine" : 1242,
+      "ModuleName" : "SDRAM_Controller_HS_Top",
+      "SubInsts" : [
+       {
+        "InstFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_controller_hs/sdram_controller_hs.v",
+        "InstLine" : 1492,
+        "InstName" : "u_sdrc_hs_top",
+        "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_controller_hs/sdram_controller_hs.v",
+        "ModuleLine" : 10,
+        "ModuleName" : "~sdrc_hs_top.SDRAM_Controller_HS_Top"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 349,
+    "InstName" : "line_ram_ps2",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb/ps2_line_ram.v",
+    "ModuleLine" : 10,
+    "ModuleName" : "ps2_line_ram"
    }
   ]
  }

@@ -11,7 +11,7 @@ module scaler_top (
     input  wire [5:0]  PS2_B,
 
     input  wire        PS2_HSYNC,
-    input  wire        PS2_VSYNC,
+    input  wire        PS2_VSYNC, 
     input  wire        PS2_PCLK,
     // LCD output
     output reg [5:0]  LCD_R,
@@ -28,7 +28,19 @@ module scaler_top (
     input wire        SPI_CS,
     input wire        SPI_CLK,
     input wire        SPI_MOSI,
-    output  reg       SPI_MISO
+    output  reg       SPI_MISO,
+
+
+    output O_sdram_clk,
+    output O_sdram_cke,
+    output O_sdram_cs_n,
+    output O_sdram_cas_n,
+    output O_sdram_ras_n,
+    output O_sdram_wen_n,
+    output [3:0] O_sdram_dqm,
+    output [10:0] O_sdram_addr,
+    output [1:0] O_sdram_ba,
+    inout [31:0] IO_sdram_dq
 );
 reg [7:0] tx_byte;
 reg [7:0] rx_byte;
@@ -172,6 +184,25 @@ assign LCD_DE =
     (h_cnt < H_ACTIVE) &&
     (v_cnt < V_ACTIVE);
 
+
+reg oldDe;
+reg [9:0] lineRequested;
+reg sdramReadReq;
+wire sdramReadAck;
+always @(posedge LCD_PCLK) begin 
+    oldDe <= LCD_DE;
+
+    if (oldDe && !LCD_DE) begin 
+        lineRequested <= v_cnt + 1;
+        sdramReadReq <= 1;
+    end
+    if (sdramReadAck) begin 
+        sdramReadReq <= 0;
+    end
+
+
+end
+
 localparam V_SYNC = 20;
 
 reg osd_pixel;
@@ -200,14 +231,14 @@ always @(*) begin
     if ((v_cnt >= 12) && (v_cnt < 588))
         osd_pixel = vram[{osd_y[5:3], 7'b0} + osd_x][osd_y[2:0]];
     else
-        osd_pixel = 1'b0;
+        osd_pixel = 1'b0; 
 end
-always @(negedge LCD_PCLK) begin
+always @(posedge LCD_PCLK) begin
     if ((h_cnt < H_ACTIVE) &&
         (v_cnt < V_ACTIVE)) begin
-        LCD_R <= 0;
-        LCD_G <= 0;
-        LCD_B <= line_ram[h_cnt];
+        LCD_R <= osd_pixel ? 6'h3f : {screenData[15:11], 1'b0};
+        LCD_G <= osd_pixel ? 6'h3f : screenData[10:5];
+        LCD_B <= osd_pixel ? 6'h3f : {screenData[4:0], 1'b0};
     end
 end
 reg [15:0] h_total;
@@ -227,32 +258,107 @@ pix_clk_480p pixClk480p(
     );
 */
 
-reg        video_de;
-reg [10:0] pixel_x;
-reg [9:0]  pixel_y;
 
 reg        video_de;
 reg [10:0] pixel_x;
 reg [9:0]  pixel_y;
 reg [5:0] line_ram [0:703];
-
+reg oldHs;
+wire ps2CommitAck;
+reg ps2CommitReq;
+reg [9:0] ps2LineToCommit;
 always @(posedge PS2_PCLK) begin
-    if (video_de )
-        line_ram[pixel_x] <= PS2_B;
+    oldHs <= PS2_HSYNC;
+    if (oldHs && !PS2_HSYNC) begin 
+        ps2CommitReq <= 1;
+        ps2LineToCommit <= pixel_y + 1;
+    end
+    if (ps2CommitAck) begin 
+        ps2CommitReq <=0;
+    end
+
+
 end
 
-ps2_line_fifo line_fifo(
-		.Data({PS2_R,PS2_G,PS2_B}), //input [17:0] Data
-		.WrClk(PS2_PCLK), //input WrClk
-		.RdClk(RdClk), //input RdClk
-		.WrEn(video_de), //input WrEn
-        .WrReset(!PS2_VSYNC),
-		.RdEn(RdEn), //input RdEn
-		.Q(Q), //output [17:0] Q
-		.Empty(Empty), //output Empty
-		.Full(Full) //output Full
-	);
+sdram_pll sdr_pll(
+        .clkout(sdram_clk), //output clkout
+        .lock(lock_o), //output lock
+        .clkin(clk27) //input clkin
+    );
 
+wire [31:0] rgbOut;
+wire [10:0] xPosOut;
+wire vramWrEn;
+
+reg [15:0] line_buffer[1024];
+wire [15:0] screenData;
+screen_line screen_line(
+        .dout(screenData), //output [15:0] dout
+        .clka(sdram_clk), //input clka
+        .cea(vramWrEn), //input cea
+        .reseta(1'b0), //input reseta
+        .clkb(LCD_PCLK), //input clkb
+        .ceb(LCD_DE), //input ceb
+        .resetb(1'b0), //input resetb
+        .oce(1'b1), //input oce
+        .ada(xPosOut), //input [8:0] ada
+        .din(rgbOut), //input [31:0] din
+        .adb(h_cnt) //input [9:0] adb
+    );
+
+always @(posedge sdram_clk) begin 
+    if (vramWrEn) begin 
+        line_buffer[{xPosOut,1'b1}] <= rgbOut[31:16];
+        line_buffer[{xPosOut,1'b0}] <= rgbOut[15:0];
+    end
+end
+
+wire [31:0] fifoDataIn;
+wire fifoRdEn;
+wire [9:0] writeXptr;
+sdram_interface sdr_interface (
+    .clk(sdram_clk),
+
+    .lineRequested,
+    .sdramReadReq,
+    .sdramReadAck,
+
+    .ps2LineToCommit,
+    .ps2CommitReq,
+    .ps2CommitAck,
+        
+    .rgbOut,
+    .xPosOut,
+    .vramWrEn,
+    .fifoRdEn,
+    .fifoDataIn,
+    .writeXptr,
+    .O_sdram_clk,
+    .O_sdram_cke,
+    .O_sdram_cs_n,
+    .O_sdram_cas_n,
+    .O_sdram_ras_n,
+    .O_sdram_wen_n,
+    .O_sdram_dqm,
+    .O_sdram_addr,
+    .O_sdram_ba,
+    .IO_sdram_dq
+);
+
+
+ps2_line_ram line_ram_ps2(
+        .dout(fifoDataIn), //output [17:0] dout
+        .clka(PS2_PCLK), //input clka
+        .cea(video_de && halfpclk && pixel_x <512), //input cea
+        .reseta(!PS2_VSYNC), //input reseta
+        .clkb(sdram_clk), //input clkb  
+        .ceb(fifoRdEn), //input ceb
+        .resetb(1'b0), //input resetb
+        .oce(1'b1), //input oce
+        .ada(pixel_x), //input [9:0] ada
+        .din({PS2_R[5:1],PS2_G,PS2_B[5:1]}),//PS2_G,PS2_B[5:1]}), //input [17:0] din
+        .adb(writeXptr) //input [9:0] adb
+    );
 
 
 always @(posedge PS2_PCLK) begin

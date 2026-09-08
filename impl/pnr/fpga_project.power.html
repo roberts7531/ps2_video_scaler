@@ -31,14 +31,12 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <div id="catalog">
 <ul>
 <li><a href="#Message" style=" font-size: 16px;">Power Messages</a>
-<ul>
-<li><a href="#Configure_Info" style=" font-size: 14px;">Configure Information</a></li>
-</ul>
 </li>
 <li><a href="#Summary" style=" font-size: 16px;">Power Summary</a>
 <ul>
 <li><a href="#Power_Info" style=" font-size: 14px;">Power Information</a></li>
 <li><a href="#Thermal_Info" style=" font-size: 14px;">Thermal Information</a></li>
+<li><a href="#Configure_Info" style=" font-size: 14px;">Configure Information</a></li>
 <li><a href="#Supply_Summary" style=" font-size: 14px;">Supply Information</a></li>
 </ul>
 </li>
@@ -61,11 +59,11 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td class="label">Design File</td>
-<td>C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\impl\gwsynthesis\fpga_project.vg</td>
+<td>/home/roberts7531/ps2_video_scaler/impl/gwsynthesis/fpga_project.vg</td>
 </tr>
 <tr>
 <td class="label">Physical Constraints File</td>
-<td>C:\Users\Roberts\Documents\ps2portable\fpga_video_scaler\fpga_code\fpga_project\src\fpga_project.cst</td>
+<td>/home/roberts7531/ps2_video_scaler/src/fpga_project.cst</td>
 </tr>
 <tr>
 <td class="label">Timing Constraints File</td>
@@ -73,7 +71,7 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td class="label">Tool Version</td>
-<td>V1.9.12 (64-bit)</td>
+<td>V1.9.9.01</td>
 </tr>
 <tr>
 <td class="label">Part Number</td>
@@ -89,39 +87,81 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td class="label">Created Time</td>
-<td>Fri Sep  4 13:40:39 2026
+<td>Tue Sep  8 21:44:58 2026
 </td>
 </tr>
 <tr>
 <td class="label">Legal Announcement</td>
-<td>Copyright (C)2014-2025 Gowin Semiconductor Corporation. All rights reserved.</td>
+<td>Copyright (C)2014-2024 Gowin Semiconductor Corporation. All rights reserved.</td>
+</tr>
+</table>
+<h1><a name="Summary">Power Summary</a></h1>
+<h2><a name="Power_Info">Power Information:</a></h2>
+<table class="summary_table">
+<tr>
+<td class="label">Total Power (mW)</td>
+<td>420.894</td>
+</tr>
+<tr>
+<td class="label">Quiescent Power (mW)</td>
+<td>92.931</td>
+</tr>
+<tr>
+<td class="label">Dynamic Power (mW)</td>
+<td>327.963</td>
+</tr>
+</table>
+<h2><a name="Thermal_Info">Thermal Information:</a></h2>
+<table class="summary_table">
+<tr>
+<td class="label">Junction Temperature</td>
+<td>37.559</td>
+</tr>
+<tr>
+<td class="label">Theta JA</td>
+<td>29.840</td>
+</tr>
+<tr>
+<td class="label">Max Allowed Ambient Temperature</td>
+<td>72.441</td>
 </tr>
 </table>
 <h2><a name="Configure_Info">Configure Information:</a></h2>
 <table class="summary_table">
 <tr>
-<td class="label">Grade</td>
-<td>Commercial</td>
+<td class="label">Default IO Toggle Rate</td>
+<td>0.125</td>
+</tr>
+<td class="label">Default Remain Toggle Rate</td>
+<td>0.125</td>
 </tr>
 <tr>
-<td class="label">Process</td>
-<td>Typical</td>
+<td class="label">Use Vectorless Estimation</td>
+<td>false</td>
 </tr>
 <tr>
-<td class="label">Ambient Temperature</td>
-<td>25.000
+<td class="label">Filter Glitches</td>
+<td>false</td>
+</tr>
+<tr>
+<td class="label">Related Vcd File</td>
+<td></td>
+</tr>
+<tr>
+<td class="label">Related Saif File</td>
+<td></td>
 </tr>
 <tr>
 <td class="label">Use Custom Theta JA</td>
 <td>false</td>
 </tr>
 <tr>
-<td class="label">Heat Sink</td>
-<td>None</td>
-</tr>
-<tr>
 <td class="label">Air Flow</td>
 <td>LFM_0</td>
+</tr>
+<tr>
+<td class="label">Heat Sink</td>
+<td>None</td>
 </tr>
 <tr>
 <td class="label">Use Custom Theta SA</td>
@@ -136,55 +176,8 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <td>false</td>
 </tr>
 <tr>
-<td class="label">Related Vcd File</td>
-<td></td>
-</tr>
-<tr>
-<td class="label">Related Saif File</td>
-<td></td>
-</tr>
-<tr>
-<td class="label">Filter Glitches</td>
-<td>false</td>
-</tr>
-<tr>
-<td class="label">Default IO Toggle Rate</td>
-<td>0.125</td>
-</tr>
-<tr>
-<td class="label">Default Remain Toggle Rate</td>
-<td>0.125</td>
-</tr>
-</table>
-<h1><a name="Summary">Power Summary</a></h1>
-<h2><a name="Power_Info">Power Information:</a></h2>
-<table class="summary_table">
-<tr>
-<td class="label">Total Power (mW)</td>
-<td>496.126</td>
-</tr>
-<tr>
-<td class="label">Quiescent Power (mW)</td>
-<td>122.076</td>
-</tr>
-<tr>
-<td class="label">Dynamic Power (mW)</td>
-<td>374.050</td>
-</tr>
-</table>
-<h2><a name="Thermal_Info">Thermal Information:</a></h2>
-<table class="summary_table">
-<tr>
-<td class="label">Junction Temperature</td>
-<td>39.804</td>
-</tr>
-<tr>
-<td class="label">Theta JA</td>
-<td>29.840</td>
-</tr>
-<tr>
-<td class="label">Max Allowed Ambient Temperature</td>
-<td>70.196</td>
+<td class="label">Ambient Temperature</td>
+<td>25.000
 </tr>
 </table>
 <h2><a name="Supply_Summary">Supply Information:</a></h2>
@@ -199,30 +192,30 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <tr>
 <td>VCC</td>
 <td>1.000</td>
-<td>363.960</td>
-<td>70.000</td>
-<td>433.960</td>
+<td>286.585</td>
+<td>61.515</td>
+<td>348.100</td>
 </tr>
 <tr>
 <td>VCCX</td>
-<td>3.300</td>
-<td>1.802</td>
-<td>15.000</td>
-<td>55.448</td>
+<td>2.500</td>
+<td>7.404</td>
+<td>11.364</td>
+<td>46.919</td>
 </tr>
 <tr>
 <td>VCCIO18</td>
 <td>1.800</td>
-<td>1.166</td>
-<td>0.408</td>
-<td>2.834</td>
+<td>1.011</td>
+<td>0.166</td>
+<td>2.117</td>
 </tr>
 <tr>
 <td>VCCIO33</td>
 <td>3.300</td>
-<td>0.619</td>
-<td>0.558</td>
-<td>3.885</td>
+<td>6.379</td>
+<td>0.821</td>
+<td>23.758</td>
 </tr>
 </table>
 <h1><a name="Detail">Power Details</a></h1>
@@ -236,25 +229,25 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td>Logic</td>
-<td>0.853</td>
+<td>1.335</td>
 <td>NA</td>
-<td>6.397</td>
+<td>8.601</td>
 </tr>
 <tr>
 <td>IO</td>
-<td>21.074
-<td>9.181
-<td>9.486
+<td>64.449
+<td>15.655
+<td>12.524
 </tr>
 <tr>
 <td>BSRAM</td>
-<td>356.424
+<td>262.436
 <td>NA</td>
 <td>NA</td>
 </tr>
 <tr>
 <td>PLL</td>
-<td>4.842
+<td>15.332
 <td>NA</td>
 <td>NA</td>
 </tr>
@@ -268,44 +261,64 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 </tr>
 <tr>
 <td>scaler_top</td>
-<td>362.118</td>
-<td>362.118(351.305)</td>
+<td>279.103</td>
+<td>279.103(272.317)</td>
 <tr>
 <td>scaler_top/gw_gao_inst_0/</td>
-<td>346.374</td>
-<td>346.374(346.374)</td>
+<td>229.494</td>
+<td>229.494(229.494)</td>
 <tr>
 <td>scaler_top/gw_gao_inst_0/u_icon_top/</td>
 <td>0.005</td>
 <td>0.005(0.000)</td>
 <tr>
 <td>scaler_top/gw_gao_inst_0/u_la0_top/</td>
-<td>346.369</td>
-<td>346.369(346.196)</td>
+<td>229.489</td>
+<td>229.489(229.341)</td>
 <tr>
 <td>scaler_top/gw_gao_inst_0/u_la0_top/u_ao_crc32/</td>
-<td>0.010</td>
-<td>0.010(0.000)</td>
+<td>0.011</td>
+<td>0.011(0.000)</td>
 <tr>
 <td>scaler_top/gw_gao_inst_0/u_la0_top/u_ao_match_0/</td>
 <td>0.003</td>
 <td>0.003(0.000)</td>
 <tr>
 <td>scaler_top/gw_gao_inst_0/u_la0_top/u_ao_mem_ctrl/</td>
-<td>346.183</td>
-<td>346.183(0.000)</td>
+<td>229.327</td>
+<td>229.327(0.000)</td>
 <tr>
 <td>scaler_top/lcd_pll/</td>
 <td>4.842</td>
 <td>4.842(0.000)</td>
 <tr>
-<td>scaler_top/line_fifo/</td>
-<td>0.089</td>
-<td>0.089(0.089)</td>
+<td>scaler_top/line_ram_ps2/</td>
+<td>15.458</td>
+<td>15.458(0.000)</td>
 <tr>
-<td>scaler_top/line_fifo/fifo_inst/</td>
-<td>0.089</td>
-<td>0.089(0.000)</td>
+<td>scaler_top/screen_line/</td>
+<td>11.445</td>
+<td>11.445(0.000)</td>
+<tr>
+<td>scaler_top/sdr_interface/</td>
+<td>0.588</td>
+<td>0.588(0.429)</td>
+<tr>
+<td>scaler_top/sdr_interface/sdrc/</td>
+<td>0.429</td>
+<td>0.429(0.429)</td>
+<tr>
+<td>scaler_top/sdr_interface/sdrc/u_sdrc_hs_top/</td>
+<td>0.429</td>
+<td>0.429(0.260)</td>
+<tr>
+<td>scaler_top/sdr_interface/sdrc/u_sdrc_hs_top/u_sdrc_control_fsm/</td>
+<td>0.260</td>
+<td>0.260(0.000)</td>
+<tr>
+<td>scaler_top/sdr_pll/</td>
+<td>10.490</td>
+<td>10.490(0.000)</td>
 </table>
 <h2><a name="By_Clock_Domain">Power By Clock Domain:</a></h2>
 <table class="detail_table">
@@ -317,12 +330,12 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <tr>
 <td>tck_pad_i</td>
 <td>20.000</td>
-<td>57.796</td>
+<td>38.221</td>
 </tr>
 <tr>
-<td>PS2_PCLK</td>
-<td>100.000</td>
-<td>296.146</td>
+<td>sdr_pll/rpll_inst/CLKOUT.default_gen_clk</td>
+<td>100.286</td>
+<td>207.860</td>
 </tr>
 <tr>
 <td>NO CLOCK DOMAIN</td>
@@ -330,14 +343,24 @@ table.detail_table th.label {  min-width: 8%; width: 8%; }
 <td>0.000</td>
 </tr>
 <tr>
+<td>PS2_PCLK</td>
+<td>100.000</td>
+<td>7.793</td>
+</tr>
+<tr>
 <td>lcd_pll/rpll_inst/CLKOUT.default_gen_clk</td>
 <td>46.286</td>
-<td>3.373</td>
+<td>9.897</td>
+</tr>
+<tr>
+<td>SPI_CLK</td>
+<td>100.000</td>
+<td>0.066</td>
 </tr>
 <tr>
 <td>clk27</td>
 <td>27.000</td>
-<td>4.842</td>
+<td>15.332</td>
 </tr>
 </table>
 </div><!-- content -->
