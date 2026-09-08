@@ -9,8 +9,6 @@ Running placement......
 [30%] Placement Phase 2 completed
 WARN  (TA1117) : Can't calculate clocks' relationship between: "SPI_CLK" and "lcd_pll/rpll_inst/CLKOUT.default_gen_clk"
 WARN  (TA1117) : Can't calculate clocks' relationship between: "sdr_pll/rpll_inst/CLKOUT.default_gen_clk" and "PS2_PCLK"
-WARN  (TA1117) : Can't calculate clocks' relationship between: "tck_pad_i" and "sdr_pll/rpll_inst/CLKOUT.default_gen_clk"
-WARN  (TA1117) : Can't calculate clocks' relationship between: "sdr_pll/rpll_inst/CLKOUT.default_gen_clk" and "tck_pad_i"
 WARN  (TA1117) : Can't calculate clocks' relationship between: "PS2_PCLK" and "sdr_pll/rpll_inst/CLKOUT.default_gen_clk"
 [50%] Placement Phase 3 completed
 Running routing......
@@ -32,5 +30,5 @@ Generate file "/home/roberts7531/ps2_video_scaler/impl/pnr/fpga_project.pin.html
 Generate file "/home/roberts7531/ps2_video_scaler/impl/pnr/fpga_project.rpt.html" completed
 Generate file "/home/roberts7531/ps2_video_scaler/impl/pnr/fpga_project.rpt.txt" completed
 Generate file "/home/roberts7531/ps2_video_scaler/impl/pnr/fpga_project.tr.html" completed
-Tue Sep  8 21:44:58 2026
+Tue Sep  8 23:50:59 2026
 

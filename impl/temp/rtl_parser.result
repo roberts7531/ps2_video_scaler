@@ -25,7 +25,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 295,
+    "InstLine" : 294,
     "InstName" : "screen_line",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v",
     "ModuleLine" : 10,
@@ -33,7 +33,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 319,
+    "InstLine" : 313,
     "InstName" : "sdr_interface",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv",
     "ModuleLine" : 1,
@@ -41,7 +41,7 @@
     "SubInsts" : [
      {
       "InstFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv",
-      "InstLine" : 49,
+      "InstLine" : 47,
       "InstName" : "sdrc",
       "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_controller_hs/sdram_controller_hs.v",
       "ModuleLine" : 1242,
@@ -61,7 +61,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 349,
+    "InstLine" : 343,
     "InstName" : "line_ram_ps2",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb/ps2_line_ram.v",
     "ModuleLine" : 10,

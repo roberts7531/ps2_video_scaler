@@ -15,8 +15,7 @@ module sdram_interface (
     
     output reg fifoRdEn,
     input [31:0] fifoDataIn,
-    output reg [9:0] writeXptr,
-    output reg fifoRst,
+    output reg [8:0] writeXptr,
     output O_sdram_clk,
     output O_sdram_cke,
     output O_sdram_cs_n,
@@ -40,7 +39,6 @@ always @(posedge clk) begin
 end
 
 
-logic [7:0] I_sdrc_data_len;
 logic [20:0] I_sdrc_addr;
 logic [2:0]  I_sdrc_cmd;
 logic I_sdrc_cmd_en;
@@ -59,7 +57,7 @@ SDRAM_Controller_HS_Top sdrc(
 		.IO_sdram_dq, //inout [31:0] IO_sdram_dq
 
 
-		.I_sdrc_rst_n(1), //input I_sdrc_rst_n
+		.I_sdrc_rst_n(1'd1), //input I_sdrc_rst_n
 		.I_sdrc_clk(clk), //input I_sdrc_clk
 		.I_sdram_clk(clk), //input I_sdram_clk
 		.I_sdrc_cmd_en(I_sdrc_cmd_en), //input I_sdrc_cmd_en
@@ -70,7 +68,7 @@ SDRAM_Controller_HS_Top sdrc(
 		.I_sdrc_addr(I_sdrc_addr), //input [20:0] I_sdrc_addr
 		.I_sdrc_dqm(4'b0000), //input [3:0] I_sdrc_dqm
 		.I_sdrc_data(I_sdrc_data), //input [31:0] I_sdrc_data
-		.I_sdrc_data_len(I_sdrc_data_len), //input [7:0] I_sdrc_data_len
+		.I_sdrc_data_len(8'hff), //input [7:0] I_sdrc_data_len
 		.O_sdrc_data(O_sdrc_data), //output [31:0] O_sdrc_data
 		.O_sdrc_init_done(O_sdrc_init_done), //output O_sdrc_init_done
 		.O_sdrc_cmd_ack(O_sdrc_cmd_ack) //output O_sdrc_cmd_ack
@@ -85,8 +83,8 @@ typedef enum logic [3:0] {
     END_READ_LINE,//4
     ACTIVATE_LINE_WRITE, //5
     WRITE_LINE, //6
-    END_WRITE_LINE, //7
-    COOLDOWN
+    WAIT_WRITE_DONE,
+    END_WRITE_LINE
 
 } sdram_state_t;
 
@@ -105,14 +103,12 @@ localparam logic [2:0] READ_DELAY = 7;
 logic [4:0] readDelay;
 logic [7:0] burstLen;
 logic [20:0] burstAddr;
-logic [5:0] cooldownTimer;
 
-localparam logic [2:0] BURSTS_PER_LINE = 5;
-logic [2:0] currentBurst;
+localparam logic  BURSTS_PER_LINE = 1;
+logic currentBurst;
 always @(posedge clk) begin
                           vramWrEn <= 0;
 I_sdrc_cmd_en <= 0;
-    fifoRst <= 0;
     if (~reset_n_sync) begin
         sdram_fsm_state <= STARTUP;
     end else begin  
@@ -127,15 +123,13 @@ I_sdrc_cmd_en <= 0;
 
                if(readReqSync) begin 
                     sdram_fsm_state <= ACTIVATE_LINE_READ;
-                    I_sdrc_data_len <= 8'hff;
                     I_sdrc_cmd_en <= 1;
-                    I_sdrc_addr <= {lineRequested,8'd0};
+                    I_sdrc_addr <= {lineRequested,1'b0,8'd0};
                     currentBurst <= 0;
                end else if (writeReqSync) begin 
                     sdram_fsm_state <= ACTIVATE_LINE_WRITE;
-                    I_sdrc_data_len <= 8'hff;
                     I_sdrc_cmd_en <= 1;
-                    I_sdrc_addr <= {ps2LineToCommit,8'd0};
+                    I_sdrc_addr <= {ps2LineToCommit,1'b0,8'd0};
                     currentBurst <= 0;
                end
             end
@@ -144,7 +138,7 @@ I_sdrc_cmd_en <= 0;
                 I_sdrc_cmd_en <= 0;
                 if (O_sdrc_cmd_ack) begin 
                     readDelay <= READ_DELAY;
-                    I_sdrc_addr <= {lineRequested,8'd0};
+                    I_sdrc_addr <= {lineRequested,currentBurst,8'd0};
                     I_sdrc_cmd <= READ_CMD;
                     I_sdrc_cmd_en <= 1;
                     sdram_fsm_state <= READ_LINE;
@@ -156,7 +150,7 @@ I_sdrc_cmd_en <= 0;
             READ_LINE: begin 
                 I_sdrc_cmd_en <= 0;
                 if (readDelay == 2) begin 
-                    xPosOut <= burstLen;
+                    xPosOut <= {currentBurst,burstLen};
                     vramWrEn <= 1;
                     rgbOut <= O_sdrc_data;
                     if (burstLen == 8'hff) begin 
@@ -167,30 +161,28 @@ I_sdrc_cmd_en <= 0;
             end
 
             END_READ_LINE: begin 
-                //if (currentBurst == BURSTS_PER_LINE) begin 
+                if (currentBurst == 1'b1) begin 
                     sdramReadAck <= 1;
                     
                     if(~readReqSync) begin 
                         currentBurst <= 0;
                         sdramReadAck <= 0;
-                        cooldownTimer <= 5;
-                        sdram_fsm_state <= COOLDOWN;
+                        sdram_fsm_state <= IDLE;
                     end
-                //end else begin 
-                //    currentBurst <= currentBurst + 1;
-                //    sdram_fsm_state <= ACTIVATE_LINE_READ;
-                //    I_sdrc_data_len <= 8'hff;
-                //    I_sdrc_cmd <= ACT_CMD;
-                //    I_sdrc_cmd_en <= 1;
-                //    I_sdrc_addr <= {lineRequested,8'd0};
-                //end
+                end else begin 
+                    currentBurst <= 1'b1;
+                    sdram_fsm_state <= ACTIVATE_LINE_READ;
+                    I_sdrc_cmd <= ACT_CMD;
+                    I_sdrc_cmd_en <= 1;
+                    I_sdrc_addr <= {lineRequested,1'b1,8'd0};
+                end
                 
             end
             ACTIVATE_LINE_WRITE: begin 
                 I_sdrc_cmd_en <= 0;
                 fifoRdEn <=1;
                 if (O_sdrc_cmd_ack) begin 
-                    I_sdrc_addr <= {ps2LineToCommit,8'd0};//(ps2LineToCommit << 10) + (ps2LineToCommit << 8) + (currentBurst << 8);
+                    I_sdrc_addr <= {ps2LineToCommit,currentBurst,8'd0};//(ps2LineToCommit << 10) + (ps2LineToCommit << 8) + (currentBurst << 8);
                     I_sdrc_cmd <= WRITE_CMD;
                     I_sdrc_data <= fifoDataIn;
                     I_sdrc_cmd_en <= 1;
@@ -198,46 +190,42 @@ I_sdrc_cmd_en <= 0;
                     burstLen <= 0;
                     fifoRdEn <= 1;
                 end
-            end
+            end 
             WRITE_LINE: begin 
                 I_sdrc_cmd_en <= 0;
                 I_sdrc_data <= fifoDataIn;
-                writeXptr <= burstLen;
+                writeXptr <= {currentBurst,burstLen};
                 if (burstLen == 8'hff) begin 
                     burstLen <= 0; 
                     fifoRdEn <=0;
                     
-                    sdram_fsm_state <= END_WRITE_LINE;
+                    sdram_fsm_state <= WAIT_WRITE_DONE;
 
 
-                end else burstLen <= burstLen + 1;
+                end else burstLen <= burstLen + 8'd1;
+            end
+            WAIT_WRITE_DONE: begin 
+                if(O_sdrc_cmd_ack) sdram_fsm_state <= END_WRITE_LINE;
             end
             END_WRITE_LINE: begin 
-                //if (currentBurst == BURSTS_PER_LINE) begin 
+                if (currentBurst == 1'b1) begin 
                     ps2CommitAck <= 1;
                     
                     if(~writeReqSync) begin 
                         currentBurst <= 0;
                         ps2CommitAck <= 0;
-                        sdram_fsm_state <= COOLDOWN;
-                        cooldownTimer <= 5;
+                        sdram_fsm_state <= IDLE;
                     end
-                /*end else begin 
-                    currentBurst <= currentBurst + 1;
+                end else begin 
+                    currentBurst <= 1'b1;
                     sdram_fsm_state <= ACTIVATE_LINE_WRITE;
-                    I_sdrc_data_len <= 8'hff;
                     I_sdrc_cmd <= ACT_CMD;
                     I_sdrc_cmd_en <= 1;
-                    I_sdrc_addr <= {ps2LineToCommit,8'd0};
+                    I_sdrc_addr <= {ps2LineToCommit,1'b1,8'd0};
 
-                end*/
+                end
             end
-            COOLDOWN: begin 
-                if(cooldownTimer == 0) begin 
-                    sdram_fsm_state <= IDLE;
-                end else cooldownTimer <= cooldownTimer -1;
-            end
-           
+            
         endcase
 
     end

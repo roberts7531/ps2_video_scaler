@@ -14,27 +14,6 @@
                 <Signal>PS2_R[1]</Signal>
                 <Signal>PS2_R[0]</Signal>
             </Bus>
-            <Signal capture_enable="true">PS2_SCL</Signal>
-            <Signal capture_enable="true">PS2_SDA</Signal>
-            <Bus capture_enable="true" name="h_total[15:0]">
-                <Signal>h_total[15]</Signal>
-                <Signal>h_total[14]</Signal>
-                <Signal>h_total[13]</Signal>
-                <Signal>h_total[12]</Signal>
-                <Signal>h_total[11]</Signal>
-                <Signal>h_total[10]</Signal>
-                <Signal>h_total[9]</Signal>
-                <Signal>h_total[8]</Signal>
-                <Signal>h_total[7]</Signal>
-                <Signal>h_total[6]</Signal>
-                <Signal>h_total[5]</Signal>
-                <Signal>h_total[4]</Signal>
-                <Signal>h_total[3]</Signal>
-                <Signal>h_total[2]</Signal>
-                <Signal>h_total[1]</Signal>
-                <Signal>h_total[0]</Signal>
-            </Bus>
-            <Signal capture_enable="true">halfpclk</Signal>
             <Bus capture_enable="true" name="h_count[15:0]">
                 <Signal>h_count[15]</Signal>
                 <Signal>h_count[14]</Signal>
@@ -97,9 +76,22 @@
                 <Signal>pixel_y[0]</Signal>
             </Bus>
             <Signal capture_enable="true">video_de</Signal>
-            <Signal capture_enable="true">line_fifo/RdEn</Signal>
-            <Signal capture_enable="true">Q</Signal>
-            <Signal capture_enable="true">Full</Signal>
+            <Bus capture_enable="true" name="PS2_G[5:0]">
+                <Signal>PS2_G[5]</Signal>
+                <Signal>PS2_G[4]</Signal>
+                <Signal>PS2_G[3]</Signal>
+                <Signal>PS2_G[2]</Signal>
+                <Signal>PS2_G[1]</Signal>
+                <Signal>PS2_G[0]</Signal>
+            </Bus>
+            <Bus capture_enable="true" name="PS2_B[5:0]">
+                <Signal>PS2_B[5]</Signal>
+                <Signal>PS2_B[4]</Signal>
+                <Signal>PS2_B[3]</Signal>
+                <Signal>PS2_B[2]</Signal>
+                <Signal>PS2_B[1]</Signal>
+                <Signal>PS2_B[0]</Signal>
+            </Bus>
         </SignalList>
         <Triggers>
             <Trigger index="0">
@@ -145,5 +137,5 @@
             <Expression>M0</Expression>
         </Expressions>
     </AoCore>
-    <GAO_ID>0000101000111011</GAO_ID>
+    <GAO_ID>1000010010010101</GAO_ID>
 </GAO_CONFIG>

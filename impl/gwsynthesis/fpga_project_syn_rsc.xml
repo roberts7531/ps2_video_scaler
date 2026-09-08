@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Module name="scaler_top" Register="167" Alu="43" Lut="113" Bsram="1" T_Register="820(167)" T_Alu="75(43)" T_Lut="945(113)" T_Bsram="32(1)">
- <SubModule name="gw_gao_inst_0" Register="370" Alu="17" Lut="490" Bsram="29" T_Register="370(370)" T_Alu="17(17)" T_Lut="490(490)" T_Bsram="29(29)"/>
+<Module name="scaler_top" Register="167" Alu="43" Lut="121" Bsram="1" T_Register="999(167)" T_Alu="74(43)" T_Lut="1007(121)" T_Bsram="41(1)">
+ <SubModule name="gw_gao_inst_0" Register="551" Alu="16" Lut="545" Bsram="38" T_Register="551(551)" T_Alu="16(16)" T_Lut="545(545)" T_Bsram="38(38)"/>
  <SubModule name="lcd_pll"/>
  <SubModule name="sdr_pll"/>
  <SubModule name="screen_line" Bsram="1" T_Bsram="1(1)"/>
- <SubModule name="sdr_interface" Register="125" Lut="94" T_Register="283(125)" T_Alu="15(0)" T_Lut="342(94)">
+ <SubModule name="sdr_interface" Register="123" Lut="93" T_Register="281(123)" T_Alu="15(0)" T_Lut="341(93)">
   <SubModule name="sdrc" Register="158" Alu="15" Lut="248" T_Register="158(158)" T_Alu="15(15)" T_Lut="248(248)"/>
  </SubModule>
  <SubModule name="line_ram_ps2" Bsram="1" T_Bsram="1(1)"/>

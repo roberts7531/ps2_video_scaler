@@ -63,7 +63,7 @@ always @(posedge SPI_CLK or posedge SPI_CS) begin
             byteRxDone   <= 1;
             latchedByte <= {rx_byte[6:0], SPI_MOSI};
         end else begin
-            rx_bit_count <= rx_bit_count + 1;
+            rx_bit_count <= rx_bit_count + 4'd1;
         end
     end
 end
@@ -173,10 +173,10 @@ always @(posedge LCD_PCLK) begin
         if (v_cnt == V_TOTAL-1)
             v_cnt <= 0;
         else
-            v_cnt <= v_cnt + 1;
+            v_cnt <= v_cnt + 10'd1;
     end
     else begin
-        h_cnt <= h_cnt + 1;
+        h_cnt <= h_cnt + 11'd1;
     end
 end
 
@@ -193,7 +193,7 @@ always @(posedge LCD_PCLK) begin
     oldDe <= LCD_DE;
 
     if (oldDe && !LCD_DE) begin 
-        lineRequested <= v_cnt + 1;
+        lineRequested <= v_cnt + 10'd1;
         sdramReadReq <= 1;
     end
     if (sdramReadAck) begin 
@@ -271,7 +271,7 @@ always @(posedge PS2_PCLK) begin
     oldHs <= PS2_HSYNC;
     if (oldHs && !PS2_HSYNC) begin 
         ps2CommitReq <= 1;
-        ps2LineToCommit <= pixel_y + 1;
+        ps2LineToCommit <= pixel_y + 10'd1;
     end
     if (ps2CommitAck) begin 
         ps2CommitReq <=0;
@@ -290,7 +290,6 @@ wire [31:0] rgbOut;
 wire [10:0] xPosOut;
 wire vramWrEn;
 
-reg [15:0] line_buffer[1024];
 wire [15:0] screenData;
 screen_line screen_line(
         .dout(screenData), //output [15:0] dout
@@ -306,16 +305,11 @@ screen_line screen_line(
         .adb(h_cnt) //input [9:0] adb
     );
 
-always @(posedge sdram_clk) begin 
-    if (vramWrEn) begin 
-        line_buffer[{xPosOut,1'b1}] <= rgbOut[31:16];
-        line_buffer[{xPosOut,1'b0}] <= rgbOut[15:0];
-    end
-end
+
 
 wire [31:0] fifoDataIn;
 wire fifoRdEn;
-wire [9:0] writeXptr;
+wire [8:0] writeXptr;
 sdram_interface sdr_interface (
     .clk(sdram_clk),
 
@@ -349,7 +343,7 @@ sdram_interface sdr_interface (
 ps2_line_ram line_ram_ps2(
         .dout(fifoDataIn), //output [17:0] dout
         .clka(PS2_PCLK), //input clka
-        .cea(video_de && halfpclk && pixel_x <512), //input cea
+        .cea(video_de && halfpclk ), //input cea
         .reseta(!PS2_VSYNC), //input reseta
         .clkb(sdram_clk), //input clkb  
         .ceb(fifoRdEn), //input ceb

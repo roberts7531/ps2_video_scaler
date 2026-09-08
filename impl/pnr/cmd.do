@@ -3,7 +3,7 @@
 -pn GW2AR-LV18QN88C8/I7
 -cst /home/roberts7531/ps2_video_scaler/src/fpga_project.cst
 -cfg /home/roberts7531/ps2_video_scaler/impl/pnr/device.cfg
--gao_crc 0100001110001010
+-gao_crc 1000010010010101
 -bit
 -tr
 -ph

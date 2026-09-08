@@ -1,105 +1,240 @@
 module gw_gao(
-    \sdr_interface/O_sdrc_init_done ,
-    \rgbOut[17] ,
-    \rgbOut[16] ,
-    \rgbOut[15] ,
-    \rgbOut[14] ,
-    \rgbOut[13] ,
-    \rgbOut[12] ,
-    \rgbOut[11] ,
-    \rgbOut[10] ,
-    \rgbOut[9] ,
-    \rgbOut[8] ,
-    \rgbOut[7] ,
-    \rgbOut[6] ,
-    \rgbOut[5] ,
-    \rgbOut[4] ,
-    \rgbOut[3] ,
-    \rgbOut[2] ,
-    \rgbOut[1] ,
-    \rgbOut[0] ,
-    vramWrEn,
-    \sdr_interface/I_sdrc_cmd[2] ,
-    \sdr_interface/I_sdrc_cmd[1] ,
-    \sdr_interface/I_sdrc_cmd[0] ,
-    \sdr_interface/sdrc/O_sdrc_cmd_ack ,
-    \sdr_interface/sdram_fsm_state[3] ,
-    \sdr_interface/sdram_fsm_state[2] ,
-    \sdr_interface/sdram_fsm_state[1] ,
-    \sdr_interface/sdram_fsm_state[0] ,
-    LCD_VSYNC,
-    \sdr_pll/clkout ,
+    PS2_HSYNC,
+    PS2_VSYNC,
+    \PS2_R[5] ,
+    \PS2_R[4] ,
+    \PS2_R[3] ,
+    \PS2_R[2] ,
+    \PS2_R[1] ,
+    \PS2_R[0] ,
+    \h_count[15] ,
+    \h_count[14] ,
+    \h_count[13] ,
+    \h_count[12] ,
+    \h_count[11] ,
+    \h_count[10] ,
+    \h_count[9] ,
+    \h_count[8] ,
+    \h_count[7] ,
+    \h_count[6] ,
+    \h_count[5] ,
+    \h_count[4] ,
+    \h_count[3] ,
+    \h_count[2] ,
+    \h_count[1] ,
+    \h_count[0] ,
+    \v_count[15] ,
+    \v_count[14] ,
+    \v_count[13] ,
+    \v_count[12] ,
+    \v_count[11] ,
+    \v_count[10] ,
+    \v_count[9] ,
+    \v_count[8] ,
+    \v_count[7] ,
+    \v_count[6] ,
+    \v_count[5] ,
+    \v_count[4] ,
+    \v_count[3] ,
+    \v_count[2] ,
+    \v_count[1] ,
+    \v_count[0] ,
+    \pixel_x[10] ,
+    \pixel_x[9] ,
+    \pixel_x[8] ,
+    \pixel_x[7] ,
+    \pixel_x[6] ,
+    \pixel_x[5] ,
+    \pixel_x[4] ,
+    \pixel_x[3] ,
+    \pixel_x[2] ,
+    \pixel_x[1] ,
+    \pixel_x[0] ,
+    \pixel_y[9] ,
+    \pixel_y[8] ,
+    \pixel_y[7] ,
+    \pixel_y[6] ,
+    \pixel_y[5] ,
+    \pixel_y[4] ,
+    \pixel_y[3] ,
+    \pixel_y[2] ,
+    \pixel_y[1] ,
+    \pixel_y[0] ,
+    video_de,
+    \PS2_G[5] ,
+    \PS2_G[4] ,
+    \PS2_G[3] ,
+    \PS2_G[2] ,
+    \PS2_G[1] ,
+    \PS2_G[0] ,
+    \PS2_B[5] ,
+    \PS2_B[4] ,
+    \PS2_B[3] ,
+    \PS2_B[2] ,
+    \PS2_B[1] ,
+    \PS2_B[0] ,
+    PS2_PCLK,
     tms_pad_i,
     tck_pad_i,
     tdi_pad_i,
     tdo_pad_o
 );
 
-input \sdr_interface/O_sdrc_init_done ;
-input \rgbOut[17] ;
-input \rgbOut[16] ;
-input \rgbOut[15] ;
-input \rgbOut[14] ;
-input \rgbOut[13] ;
-input \rgbOut[12] ;
-input \rgbOut[11] ;
-input \rgbOut[10] ;
-input \rgbOut[9] ;
-input \rgbOut[8] ;
-input \rgbOut[7] ;
-input \rgbOut[6] ;
-input \rgbOut[5] ;
-input \rgbOut[4] ;
-input \rgbOut[3] ;
-input \rgbOut[2] ;
-input \rgbOut[1] ;
-input \rgbOut[0] ;
-input vramWrEn;
-input \sdr_interface/I_sdrc_cmd[2] ;
-input \sdr_interface/I_sdrc_cmd[1] ;
-input \sdr_interface/I_sdrc_cmd[0] ;
-input \sdr_interface/sdrc/O_sdrc_cmd_ack ;
-input \sdr_interface/sdram_fsm_state[3] ;
-input \sdr_interface/sdram_fsm_state[2] ;
-input \sdr_interface/sdram_fsm_state[1] ;
-input \sdr_interface/sdram_fsm_state[0] ;
-input LCD_VSYNC;
-input \sdr_pll/clkout ;
+input PS2_HSYNC;
+input PS2_VSYNC;
+input \PS2_R[5] ;
+input \PS2_R[4] ;
+input \PS2_R[3] ;
+input \PS2_R[2] ;
+input \PS2_R[1] ;
+input \PS2_R[0] ;
+input \h_count[15] ;
+input \h_count[14] ;
+input \h_count[13] ;
+input \h_count[12] ;
+input \h_count[11] ;
+input \h_count[10] ;
+input \h_count[9] ;
+input \h_count[8] ;
+input \h_count[7] ;
+input \h_count[6] ;
+input \h_count[5] ;
+input \h_count[4] ;
+input \h_count[3] ;
+input \h_count[2] ;
+input \h_count[1] ;
+input \h_count[0] ;
+input \v_count[15] ;
+input \v_count[14] ;
+input \v_count[13] ;
+input \v_count[12] ;
+input \v_count[11] ;
+input \v_count[10] ;
+input \v_count[9] ;
+input \v_count[8] ;
+input \v_count[7] ;
+input \v_count[6] ;
+input \v_count[5] ;
+input \v_count[4] ;
+input \v_count[3] ;
+input \v_count[2] ;
+input \v_count[1] ;
+input \v_count[0] ;
+input \pixel_x[10] ;
+input \pixel_x[9] ;
+input \pixel_x[8] ;
+input \pixel_x[7] ;
+input \pixel_x[6] ;
+input \pixel_x[5] ;
+input \pixel_x[4] ;
+input \pixel_x[3] ;
+input \pixel_x[2] ;
+input \pixel_x[1] ;
+input \pixel_x[0] ;
+input \pixel_y[9] ;
+input \pixel_y[8] ;
+input \pixel_y[7] ;
+input \pixel_y[6] ;
+input \pixel_y[5] ;
+input \pixel_y[4] ;
+input \pixel_y[3] ;
+input \pixel_y[2] ;
+input \pixel_y[1] ;
+input \pixel_y[0] ;
+input video_de;
+input \PS2_G[5] ;
+input \PS2_G[4] ;
+input \PS2_G[3] ;
+input \PS2_G[2] ;
+input \PS2_G[1] ;
+input \PS2_G[0] ;
+input \PS2_B[5] ;
+input \PS2_B[4] ;
+input \PS2_B[3] ;
+input \PS2_B[2] ;
+input \PS2_B[1] ;
+input \PS2_B[0] ;
+input PS2_PCLK;
 input tms_pad_i;
 input tck_pad_i;
 input tdi_pad_i;
 output tdo_pad_o;
 
-wire \sdr_interface/O_sdrc_init_done ;
-wire \rgbOut[17] ;
-wire \rgbOut[16] ;
-wire \rgbOut[15] ;
-wire \rgbOut[14] ;
-wire \rgbOut[13] ;
-wire \rgbOut[12] ;
-wire \rgbOut[11] ;
-wire \rgbOut[10] ;
-wire \rgbOut[9] ;
-wire \rgbOut[8] ;
-wire \rgbOut[7] ;
-wire \rgbOut[6] ;
-wire \rgbOut[5] ;
-wire \rgbOut[4] ;
-wire \rgbOut[3] ;
-wire \rgbOut[2] ;
-wire \rgbOut[1] ;
-wire \rgbOut[0] ;
-wire vramWrEn;
-wire \sdr_interface/I_sdrc_cmd[2] ;
-wire \sdr_interface/I_sdrc_cmd[1] ;
-wire \sdr_interface/I_sdrc_cmd[0] ;
-wire \sdr_interface/sdrc/O_sdrc_cmd_ack ;
-wire \sdr_interface/sdram_fsm_state[3] ;
-wire \sdr_interface/sdram_fsm_state[2] ;
-wire \sdr_interface/sdram_fsm_state[1] ;
-wire \sdr_interface/sdram_fsm_state[0] ;
-wire LCD_VSYNC;
-wire \sdr_pll/clkout ;
+wire PS2_HSYNC;
+wire PS2_VSYNC;
+wire \PS2_R[5] ;
+wire \PS2_R[4] ;
+wire \PS2_R[3] ;
+wire \PS2_R[2] ;
+wire \PS2_R[1] ;
+wire \PS2_R[0] ;
+wire \h_count[15] ;
+wire \h_count[14] ;
+wire \h_count[13] ;
+wire \h_count[12] ;
+wire \h_count[11] ;
+wire \h_count[10] ;
+wire \h_count[9] ;
+wire \h_count[8] ;
+wire \h_count[7] ;
+wire \h_count[6] ;
+wire \h_count[5] ;
+wire \h_count[4] ;
+wire \h_count[3] ;
+wire \h_count[2] ;
+wire \h_count[1] ;
+wire \h_count[0] ;
+wire \v_count[15] ;
+wire \v_count[14] ;
+wire \v_count[13] ;
+wire \v_count[12] ;
+wire \v_count[11] ;
+wire \v_count[10] ;
+wire \v_count[9] ;
+wire \v_count[8] ;
+wire \v_count[7] ;
+wire \v_count[6] ;
+wire \v_count[5] ;
+wire \v_count[4] ;
+wire \v_count[3] ;
+wire \v_count[2] ;
+wire \v_count[1] ;
+wire \v_count[0] ;
+wire \pixel_x[10] ;
+wire \pixel_x[9] ;
+wire \pixel_x[8] ;
+wire \pixel_x[7] ;
+wire \pixel_x[6] ;
+wire \pixel_x[5] ;
+wire \pixel_x[4] ;
+wire \pixel_x[3] ;
+wire \pixel_x[2] ;
+wire \pixel_x[1] ;
+wire \pixel_x[0] ;
+wire \pixel_y[9] ;
+wire \pixel_y[8] ;
+wire \pixel_y[7] ;
+wire \pixel_y[6] ;
+wire \pixel_y[5] ;
+wire \pixel_y[4] ;
+wire \pixel_y[3] ;
+wire \pixel_y[2] ;
+wire \pixel_y[1] ;
+wire \pixel_y[0] ;
+wire video_de;
+wire \PS2_G[5] ;
+wire \PS2_G[4] ;
+wire \PS2_G[3] ;
+wire \PS2_G[2] ;
+wire \PS2_G[1] ;
+wire \PS2_G[0] ;
+wire \PS2_B[5] ;
+wire \PS2_B[4] ;
+wire \PS2_B[3] ;
+wire \PS2_B[2] ;
+wire \PS2_B[1] ;
+wire \PS2_B[0] ;
+wire PS2_PCLK;
 wire tms_pad_i;
 wire tck_pad_i;
 wire tdi_pad_i;
@@ -173,9 +308,9 @@ gw_con_top  u_icon_top(
 
 ao_top_0  u_la0_top(
     .control(control0[9:0]),
-    .trig0_i(LCD_VSYNC),
-    .data_i({\sdr_interface/O_sdrc_init_done ,\rgbOut[17] ,\rgbOut[16] ,\rgbOut[15] ,\rgbOut[14] ,\rgbOut[13] ,\rgbOut[12] ,\rgbOut[11] ,\rgbOut[10] ,\rgbOut[9] ,\rgbOut[8] ,\rgbOut[7] ,\rgbOut[6] ,\rgbOut[5] ,\rgbOut[4] ,\rgbOut[3] ,\rgbOut[2] ,\rgbOut[1] ,\rgbOut[0] ,vramWrEn,\sdr_interface/I_sdrc_cmd[2] ,\sdr_interface/I_sdrc_cmd[1] ,\sdr_interface/I_sdrc_cmd[0] ,\sdr_interface/sdrc/O_sdrc_cmd_ack ,\sdr_interface/sdram_fsm_state[3] ,\sdr_interface/sdram_fsm_state[2] ,\sdr_interface/sdram_fsm_state[1] ,\sdr_interface/sdram_fsm_state[0] }),
-    .clk_i(\sdr_pll/clkout )
+    .trig0_i(PS2_VSYNC),
+    .data_i({PS2_HSYNC,PS2_VSYNC,\PS2_R[5] ,\PS2_R[4] ,\PS2_R[3] ,\PS2_R[2] ,\PS2_R[1] ,\PS2_R[0] ,\h_count[15] ,\h_count[14] ,\h_count[13] ,\h_count[12] ,\h_count[11] ,\h_count[10] ,\h_count[9] ,\h_count[8] ,\h_count[7] ,\h_count[6] ,\h_count[5] ,\h_count[4] ,\h_count[3] ,\h_count[2] ,\h_count[1] ,\h_count[0] ,\v_count[15] ,\v_count[14] ,\v_count[13] ,\v_count[12] ,\v_count[11] ,\v_count[10] ,\v_count[9] ,\v_count[8] ,\v_count[7] ,\v_count[6] ,\v_count[5] ,\v_count[4] ,\v_count[3] ,\v_count[2] ,\v_count[1] ,\v_count[0] ,\pixel_x[10] ,\pixel_x[9] ,\pixel_x[8] ,\pixel_x[7] ,\pixel_x[6] ,\pixel_x[5] ,\pixel_x[4] ,\pixel_x[3] ,\pixel_x[2] ,\pixel_x[1] ,\pixel_x[0] ,\pixel_y[9] ,\pixel_y[8] ,\pixel_y[7] ,\pixel_y[6] ,\pixel_y[5] ,\pixel_y[4] ,\pixel_y[3] ,\pixel_y[2] ,\pixel_y[1] ,\pixel_y[0] ,video_de,\PS2_G[5] ,\PS2_G[4] ,\PS2_G[3] ,\PS2_G[2] ,\PS2_G[1] ,\PS2_G[0] ,\PS2_B[5] ,\PS2_B[4] ,\PS2_B[3] ,\PS2_B[2] ,\PS2_B[1] ,\PS2_B[0] }),
+    .clk_i(PS2_PCLK)
 );
 
 endmodule
