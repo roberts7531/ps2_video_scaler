@@ -14,6 +14,10 @@
    "Type" : "verilog"
   },
   {
+   "Path" : "/home/roberts7531/ps2_video_scaler/src/lcd_timing.sv",
+   "Type" : "verilog"
+  },
+  {
    "Path" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
    "Type" : "verilog"
   },

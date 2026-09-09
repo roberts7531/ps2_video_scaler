@@ -40,40 +40,6 @@
                 <Signal>sdr_interface/sdrc/I_sdrc_cmd[0]</Signal>
             </Bus>
             <Signal capture_enable="true">sdr_interface/I_sdrc_cmd_en</Signal>
-            <Bus capture_enable="true" name="sdr_interface/rgbOut[31:0]">
-                <Signal>sdr_interface/rgbOut[31]</Signal>
-                <Signal>sdr_interface/rgbOut[30]</Signal>
-                <Signal>sdr_interface/rgbOut[29]</Signal>
-                <Signal>sdr_interface/rgbOut[28]</Signal>
-                <Signal>sdr_interface/rgbOut[27]</Signal>
-                <Signal>sdr_interface/rgbOut[26]</Signal>
-                <Signal>sdr_interface/rgbOut[25]</Signal>
-                <Signal>sdr_interface/rgbOut[24]</Signal>
-                <Signal>sdr_interface/rgbOut[23]</Signal>
-                <Signal>sdr_interface/rgbOut[22]</Signal>
-                <Signal>sdr_interface/rgbOut[21]</Signal>
-                <Signal>sdr_interface/rgbOut[20]</Signal>
-                <Signal>sdr_interface/rgbOut[19]</Signal>
-                <Signal>sdr_interface/rgbOut[18]</Signal>
-                <Signal>sdr_interface/rgbOut[17]</Signal>
-                <Signal>sdr_interface/rgbOut[16]</Signal>
-                <Signal>sdr_interface/rgbOut[15]</Signal>
-                <Signal>sdr_interface/rgbOut[14]</Signal>
-                <Signal>sdr_interface/rgbOut[13]</Signal>
-                <Signal>sdr_interface/rgbOut[12]</Signal>
-                <Signal>sdr_interface/rgbOut[11]</Signal>
-                <Signal>sdr_interface/rgbOut[10]</Signal>
-                <Signal>sdr_interface/rgbOut[9]</Signal>
-                <Signal>sdr_interface/rgbOut[8]</Signal>
-                <Signal>sdr_interface/rgbOut[7]</Signal>
-                <Signal>sdr_interface/rgbOut[6]</Signal>
-                <Signal>sdr_interface/rgbOut[5]</Signal>
-                <Signal>sdr_interface/rgbOut[4]</Signal>
-                <Signal>sdr_interface/rgbOut[3]</Signal>
-                <Signal>sdr_interface/rgbOut[2]</Signal>
-                <Signal>sdr_interface/rgbOut[1]</Signal>
-                <Signal>sdr_interface/rgbOut[0]</Signal>
-            </Bus>
             <Bus capture_enable="true" name="sdr_interface/O_sdrc_data[31:0]">
                 <Signal>sdr_interface/O_sdrc_data[31]</Signal>
                 <Signal>sdr_interface/O_sdrc_data[30]</Signal>
@@ -122,6 +88,85 @@
                 <Signal>sdr_interface/xPosOut[1]</Signal>
                 <Signal>sdr_interface/xPosOut[0]</Signal>
             </Bus>
+            <Bus capture_enable="true" name="sdr_interface/I_sdrc_data[31:0]">
+                <Signal>sdr_interface/I_sdrc_data[31]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[30]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[29]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[28]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[27]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[26]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[25]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[24]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[23]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[22]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[21]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[20]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[19]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[18]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[17]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[16]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[15]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[14]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[13]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[12]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[11]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[10]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[9]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[8]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[7]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[6]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[5]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[4]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[3]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[2]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[1]</Signal>
+                <Signal>sdr_interface/I_sdrc_data[0]</Signal>
+            </Bus>
+            <Bus capture_enable="true" name="fifoDataIn[31:0]">
+                <Signal>fifoDataIn[31]</Signal>
+                <Signal>fifoDataIn[30]</Signal>
+                <Signal>fifoDataIn[29]</Signal>
+                <Signal>fifoDataIn[28]</Signal>
+                <Signal>fifoDataIn[27]</Signal>
+                <Signal>fifoDataIn[26]</Signal>
+                <Signal>fifoDataIn[25]</Signal>
+                <Signal>fifoDataIn[24]</Signal>
+                <Signal>fifoDataIn[23]</Signal>
+                <Signal>fifoDataIn[22]</Signal>
+                <Signal>fifoDataIn[21]</Signal>
+                <Signal>fifoDataIn[20]</Signal>
+                <Signal>fifoDataIn[19]</Signal>
+                <Signal>fifoDataIn[18]</Signal>
+                <Signal>fifoDataIn[17]</Signal>
+                <Signal>fifoDataIn[16]</Signal>
+                <Signal>fifoDataIn[15]</Signal>
+                <Signal>fifoDataIn[14]</Signal>
+                <Signal>fifoDataIn[13]</Signal>
+                <Signal>fifoDataIn[12]</Signal>
+                <Signal>fifoDataIn[11]</Signal>
+                <Signal>fifoDataIn[10]</Signal>
+                <Signal>fifoDataIn[9]</Signal>
+                <Signal>fifoDataIn[8]</Signal>
+                <Signal>fifoDataIn[7]</Signal>
+                <Signal>fifoDataIn[6]</Signal>
+                <Signal>fifoDataIn[5]</Signal>
+                <Signal>fifoDataIn[4]</Signal>
+                <Signal>fifoDataIn[3]</Signal>
+                <Signal>fifoDataIn[2]</Signal>
+                <Signal>fifoDataIn[1]</Signal>
+                <Signal>fifoDataIn[0]</Signal>
+            </Bus>
+            <Bus capture_enable="true" name="sdr_interface/writeXptr[8:0]">
+                <Signal>sdr_interface/writeXptr[8]</Signal>
+                <Signal>sdr_interface/writeXptr[7]</Signal>
+                <Signal>sdr_interface/writeXptr[6]</Signal>
+                <Signal>sdr_interface/writeXptr[5]</Signal>
+                <Signal>sdr_interface/writeXptr[4]</Signal>
+                <Signal>sdr_interface/writeXptr[3]</Signal>
+                <Signal>sdr_interface/writeXptr[2]</Signal>
+                <Signal>sdr_interface/writeXptr[1]</Signal>
+                <Signal>sdr_interface/writeXptr[0]</Signal>
+            </Bus>
         </SignalList>
         <Triggers>
             <Trigger index="0">
@@ -151,7 +196,7 @@
             <Trigger index="15"/>
         </Triggers>
         <MatchUnits>
-            <MatchUnit index="0" enabled="1" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="0010" value1="0000" trigger="0"/>
+            <MatchUnit index="0" enabled="1" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="0101" value1="0000" trigger="0"/>
             <MatchUnit index="1" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
             <MatchUnit index="2" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
             <MatchUnit index="3" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
@@ -172,5 +217,5 @@
             <Expression>M0</Expression>
         </Expressions>
     </AoCore>
-    <GAO_ID>0010010001110111</GAO_ID>
+    <GAO_ID>1011101000000001</GAO_ID>
 </GAO_CONFIG>

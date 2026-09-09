@@ -9,7 +9,15 @@
   "SubInsts" : [
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 155,
+    "InstLine" : 124,
+    "InstName" : "lcdtiming",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/lcd_timing.sv",
+    "ModuleLine" : 1,
+    "ModuleName" : "lcd_timing"
+   },
+   {
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 152,
     "InstName" : "lcd_pll",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_rpll/pll_lcd.v",
     "ModuleLine" : 10,
@@ -17,7 +25,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 283,
+    "InstLine" : 251,
     "InstName" : "sdr_pll",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_pll/sdram_pll.v",
     "ModuleLine" : 10,
@@ -25,7 +33,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 294,
+    "InstLine" : 262,
     "InstName" : "screen_line",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v",
     "ModuleLine" : 10,
@@ -33,7 +41,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 313,
+    "InstLine" : 281,
     "InstName" : "sdr_interface",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv",
     "ModuleLine" : 1,
@@ -61,7 +69,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 343,
+    "InstLine" : 311,
     "InstName" : "line_ram_ps2",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb/ps2_line_ram.v",
     "ModuleLine" : 10,

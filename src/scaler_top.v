@@ -67,21 +67,7 @@ always @(posedge SPI_CLK or posedge SPI_CS) begin
         end
     end
 end
-/*
-always @(negedge SPI_CLK or posedge SPI_CS) begin
-    if (SPI_CS) begin
-        tx_byte  <= 8'h00;
-        SPI_MISO <= 1'b0;
-    end else begin
-        if (byteRxDone) begin
-            SPI_MISO <= response[7];
-            tx_byte  <= {response[6:0], 1'b0};
-        end else begin
-            SPI_MISO <= tx_byte[7];
-            tx_byte  <= {tx_byte[6:0], 1'b0};
-        end
-    end
-end*/
+
 typedef enum logic [1:0] {
     STATE_IDLE,
     STATE_ADDR_HI,
@@ -133,8 +119,19 @@ always @(negedge SPI_CLK or posedge SPI_CS) begin
 
     end
 end
+wire [10:0] h_pos;
+wire [9:0] v_pos;
+lcd_timing lcdtiming (
+    .clk(LCD_PCLK),
+    .LCD_HSYNC,
+    .LCD_VSYNC,
+    .LCD_DE,
+
+    .h_pos,
+    .v_pos
 
 
+); 
 reg write_req_sync1;
 reg write_req_sync2;
 reg write_req_seen;
@@ -157,33 +154,6 @@ pll_lcd lcd_pll(
         .clkin(clk27) //input clkin
     );
 
-reg [10:0] h_cnt; // 0-1343
-reg [9:0]  v_cnt; // 0-634
-localparam H_ACTIVE = 1024;
-
-localparam H_TOTAL  = 1344;
-
-localparam V_ACTIVE = 600;
-localparam V_TOTAL  = 635;
-
-always @(posedge LCD_PCLK) begin
-    if (h_cnt == H_TOTAL-1) begin
-        h_cnt <= 0;
-
-        if (v_cnt == V_TOTAL-1)
-            v_cnt <= 0;
-        else
-            v_cnt <= v_cnt + 10'd1;
-    end
-    else begin
-        h_cnt <= h_cnt + 11'd1;
-    end
-end
-
-assign LCD_DE =
-    (h_cnt < H_ACTIVE) &&
-    (v_cnt < V_ACTIVE);
-
 
 reg oldDe;
 reg [9:0] lineRequested;
@@ -193,7 +163,7 @@ always @(posedge LCD_PCLK) begin
     oldDe <= LCD_DE;
 
     if (oldDe && !LCD_DE) begin 
-        lineRequested <= v_cnt + 10'd1;
+        lineRequested <= v_pos + 10'd1;
         sdramReadReq <= 1;
     end
     if (sdramReadAck) begin 
@@ -203,20 +173,19 @@ always @(posedge LCD_PCLK) begin
 
 end
 
-localparam V_SYNC = 20;
 
 reg osd_pixel;
 reg [5:0] osd_y;
 reg [3:0] y_scale;
 
-wire [6:0] osd_x = h_cnt[9:3];
+wire [6:0] osd_x = h_pos[9:3];
 
 always @(posedge LCD_PCLK) begin
-    if (v_cnt == 12 && h_cnt == 0) begin
+    if (v_pos == 12 && h_pos == 0) begin
         osd_y   <= 0;
         y_scale <= 0;
     end
-    else if (h_cnt == 0 && v_cnt > 12 && v_cnt < 588) begin
+    else if (h_pos == 0 && v_pos > 12 && v_pos < 588) begin
         if (y_scale == 8) begin
             y_scale <= 0;
             osd_y   <= osd_y + 1'b1;
@@ -228,14 +197,13 @@ always @(posedge LCD_PCLK) begin
 end
 
 always @(*) begin
-    if ((v_cnt >= 12) && (v_cnt < 588))
+    if ((v_pos >= 12) && (v_pos < 588))
         osd_pixel = vram[{osd_y[5:3], 7'b0} + osd_x][osd_y[2:0]];
     else
         osd_pixel = 1'b0; 
 end
 always @(posedge LCD_PCLK) begin
-    if ((h_cnt < H_ACTIVE) &&
-        (v_cnt < V_ACTIVE)) begin
+    if (LCD_DE) begin
         LCD_R <= osd_pixel ? 6'h3f : {screenData[15:11], 1'b0};
         LCD_G <= osd_pixel ? 6'h3f : screenData[10:5];
         LCD_B <= osd_pixel ? 6'h3f : {screenData[4:0], 1'b0};
@@ -288,7 +256,7 @@ sdram_pll sdr_pll(
 
 wire [31:0] rgbOut;
 wire [10:0] xPosOut;
-wire vramWrEn;
+wire vramWrEn; 
 
 wire [15:0] screenData;
 screen_line screen_line(
@@ -302,7 +270,7 @@ screen_line screen_line(
         .oce(1'b1), //input oce
         .ada(xPosOut), //input [8:0] ada
         .din(rgbOut), //input [31:0] din
-        .adb(h_cnt) //input [9:0] adb
+        .adb(h_pos) //input [9:0] adb
     );
 
 
@@ -351,6 +319,7 @@ ps2_line_ram line_ram_ps2(
         .oce(1'b1), //input oce
         .ada(pixel_x), //input [9:0] ada
         .din({PS2_R[5:1],PS2_G,PS2_B[5:1]}),//PS2_G,PS2_B[5:1]}), //input [17:0] din
+        //.din(pixel_x),
         .adb(writeXptr) //input [9:0] adb
     );
 

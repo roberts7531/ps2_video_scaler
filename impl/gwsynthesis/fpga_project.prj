@@ -7,6 +7,7 @@
         <File path="/home/roberts7531/ps2_video_scaler/src/gowin_rpll/pll_lcd.v" type="verilog"/>
         <File path="/home/roberts7531/ps2_video_scaler/src/gowin_sdpb/ps2_line_ram.v" type="verilog"/>
         <File path="/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v" type="verilog"/>
+        <File path="/home/roberts7531/ps2_video_scaler/src/lcd_timing.sv" type="verilog"/>
         <File path="/home/roberts7531/ps2_video_scaler/src/scaler_top.v" type="verilog"/>
         <File path="/home/roberts7531/ps2_video_scaler/src/sdram_controller_hs/sdram_controller_hs.v" type="verilog"/>
         <File path="/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv" type="verilog"/>
