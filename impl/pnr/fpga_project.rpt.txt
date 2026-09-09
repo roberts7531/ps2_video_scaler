@@ -12,27 +12,27 @@
   <Part Number>: GW2AR-LV18QN88C8/I7
   <Device>: GW2AR-18
   <Device Version>: C
-  <Created Time>:Wed Sep  9 20:42:22 2026
+  <Created Time>:Thu Sep 10 00:34:30 2026
 
 
 2. PnR Details
 
   Running placement:
-    Placement Phase 0: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s
+    Placement Phase 0: CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s
     Placement Phase 1: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s
     Placement Phase 2: CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s
-    Placement Phase 3: CPU time = 0h 0m 8s, Elapsed time = 0h 0m 8s
-    Total Placement: CPU time = 0h 0m 12s, Elapsed time = 0h 0m 12s
+    Placement Phase 3: CPU time = 0h 0m 12s, Elapsed time = 0h 0m 12s
+    Total Placement: CPU time = 0h 0m 17s, Elapsed time = 0h 0m 17s
  Running routing:
-    Routing Phase 0: CPU time = 0h 0m 0.003s, Elapsed time = 0h 0m 0.003s
-    Routing Phase 1: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s
-    Routing Phase 2: CPU time = 0h 0m 11s, Elapsed time = 0h 0m 11s
+    Routing Phase 0: CPU time = 0h 0m 0.002s, Elapsed time = 0h 0m 0.002s
+    Routing Phase 1: CPU time = 0h 0m 0.881s, Elapsed time = 0h 0m 0.868s
+    Routing Phase 2: CPU time = 0h 1m 18s, Elapsed time = 0h 1m 17s
     Routing Phase 3: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
-    Total Routing: CPU time = 0h 0m 13s, Elapsed time = 0h 0m 13s
+    Total Routing: CPU time = 0h 1m 19s, Elapsed time = 0h 1m 18s
  Generate output files:
     CPU time = 0h 0m 4s, Elapsed time = 0h 0m 4s
 
- Total Time and Memory Usage: CPU time = 0h 0m 29s, Elapsed time = 0h 0m 29s, Peak memory usage = 1479MB
+ Total Time and Memory Usage: CPU time = 0h 1m 40s, Elapsed time = 0h 1m 39s, Peak memory usage = 2068MB
 
 
 3. Resource Usage Summary
@@ -40,25 +40,27 @@
   ----------------------------------------------------------
   Resources                   | Usage
   ----------------------------------------------------------
-  Logic                       | 1087/20736  6%
-    --LUT,ALU,ROM16           | 1087(1006 LUT, 81 ALU, 0 ROM16)
+  Logic                       | 1413/20736  7%
+    --LUT,ALU,ROM16           | 1413(1268 LUT, 145 ALU, 0 ROM16)
     --SSRAM(RAM16)            | 0
-  Register                    | 1100/15915  7%
+  Register                    | 1076/15915  7%
     --Logic Register as Latch | 0/15552  0%
-    --Logic Register as FF    | 1014/15552  7%
+    --Logic Register as FF    | 985/15552  7%
     --I/O Register as Latch   | 0/363  0%
-    --I/O Register as FF      | 86/363  24%
-  CLS                         | 934/10368  10%
+    --I/O Register as FF      | 91/363  26%
+  CLS                         | 1106/10368  11%
   I/O Port                    | 55
-  I/O Buf                     | 51
-    --Input Buf               | 26
+  I/O Buf                     | 53
+    --Input Buf               | 28
     --Output Buf              | 25
     --Inout Buf               | 0
   IOLOGIC                     | <1%
     --ODDR                    | 1
-  BSRAM                       | 66%
-    --SDPB                    | 30
-  DSP                         | 0%
+  BSRAM                       | 92%
+    --SDPB                    | 42
+  DSP                         | 5%
+    --PADD18                  | 1
+    --MULT18X18               | 2
   PLL                         | 2/2  100%
   DCS                         | 0/8  0%
   DQCE                        | 0/24  0%
@@ -93,7 +95,7 @@
   Global Clock  | Usage       
   -------------------------------
   PRIMARY       | 6/8(75%)
-  LW            | 3/8(38%)
+  LW            | 4/8(50%)
   GCLK_PIN      | 4/5(80%)
   PLL           | 2/2(100%)
   CLKDIV        | 0/8(0%)
@@ -107,14 +109,15 @@
   Signal         | Global Clock   | Location
   -------------------------------------------
   clk27_d        | PRIMARY        |  BR BL
-  PS2_PCLK_d     | PRIMARY        |  TR TL
-  SPI_CLK_d      | PRIMARY        |  TL
+  PS2_PCLK_d     | PRIMARY        |  TR TL BR BL
+  SPI_CLK_d      | PRIMARY        |  BL
   LCD_PCLK_d     | PRIMARY        |  TL BR BL
-  sdr_pll_0      | PRIMARY        |  TR TL BR BL
+  sdram_clk      | PRIMARY        |  TR TL BR BL
   gw_gao_inst_0/control0[0]| PRIMARY        |  TR TL BR BL
   gw_gao_inst_0/gao_jtag_reset| LW             |  -
   gw_gao_inst_0/u_la0_top/n20_3| LW             |  -
-  gw_gao_inst_0/u_la0_top/data_out_shift_reg_105_7| LW             |  -
+  gw_gao_inst_0/u_la0_top/data_out_shift_reg_76_7| LW             |  -
+  gw_gao_inst_0/u_la0_top/rst_ao| LW             |  -
   ===========================================
 
 
@@ -141,7 +144,7 @@ PS2_G[5]          |           | 77/1          | Y          | in    | IOT30[A] | 
 PS2_B[0]          |           | 76/1          | Y          | in    | IOT30[B] | LVCMOS18   | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8       
 PS2_B[1]          |           | 75/1          | Y          | in    | IOT34[A] | LVCMOS18   | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8       
 PS2_B[2]          |           | 74/1          | Y          | in    | IOT34[B] | LVCMOS18   | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8       
-PS2_B[3]          |           | 73/1          | Y          | in    | IOT40[A] | LVCMOS18   | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8       
+PS2_B[3]          |           | 73/1          | Y          | in    | IOT40[A] | LVCMOS18   | NA    | DOWN      | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8       
 PS2_B[4]          |           | 72/1          | Y          | in    | IOT40[B] | LVCMOS18   | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8       
 PS2_B[5]          |           | 71/1          | Y          | in    | IOT44[A] | LVCMOS18   | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8       
 PS2_HSYNC         |           | 69/1          | Y          | in    | IOT50[A] | LVCMOS18   | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8       
@@ -200,7 +203,7 @@ Loc./Bank| Signal            | Dir.  | Site     | IO Type  | Drive | Pull Mode |
 76/1     | PS2_B[0]          | in    | IOT30[B] | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
 75/1     | PS2_B[1]          | in    | IOT34[A] | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
 74/1     | PS2_B[2]          | in    | IOT34[B] | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
-73/1     | PS2_B[3]          | in    | IOT40[A] | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
+73/1     | PS2_B[3]          | in    | IOT40[A] | LVCMOS18 | NA    | DOWN      | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
 72/1     | PS2_B[4]          | in    | IOT40[B] | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
 71/1     | PS2_B[5]          | in    | IOT44[A] | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  
 70/1     | PS2_VSYNC         | in    | IOT44[B] | LVCMOS18 | NA    | UP        | ON        | NONE       | NA         | NA         | NA              | NA            | 1.8  

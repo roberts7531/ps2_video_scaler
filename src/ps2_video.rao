@@ -50,19 +50,6 @@
                 <Signal>v_count[1]</Signal>
                 <Signal>v_count[0]</Signal>
             </Bus>
-            <Bus capture_enable="true" name="pixel_x[10:0]">
-                <Signal>pixel_x[10]</Signal>
-                <Signal>pixel_x[9]</Signal>
-                <Signal>pixel_x[8]</Signal>
-                <Signal>pixel_x[7]</Signal>
-                <Signal>pixel_x[6]</Signal>
-                <Signal>pixel_x[5]</Signal>
-                <Signal>pixel_x[4]</Signal>
-                <Signal>pixel_x[3]</Signal>
-                <Signal>pixel_x[2]</Signal>
-                <Signal>pixel_x[1]</Signal>
-                <Signal>pixel_x[0]</Signal>
-            </Bus>
             <Bus capture_enable="true" name="pixel_y[9:0]">
                 <Signal>pixel_y[9]</Signal>
                 <Signal>pixel_y[8]</Signal>
@@ -76,27 +63,54 @@
                 <Signal>pixel_y[0]</Signal>
             </Bus>
             <Signal capture_enable="true">video_de</Signal>
-            <Bus capture_enable="true" name="PS2_G[5:0]">
-                <Signal>PS2_G[5]</Signal>
-                <Signal>PS2_G[4]</Signal>
-                <Signal>PS2_G[3]</Signal>
-                <Signal>PS2_G[2]</Signal>
-                <Signal>PS2_G[1]</Signal>
-                <Signal>PS2_G[0]</Signal>
+            <Bus capture_enable="true" name="modedetect/activeMode[2:0]">
+                <Signal>modedetect/activeMode[2]</Signal>
+                <Signal>modedetect/activeMode[1]</Signal>
+                <Signal>modedetect/activeMode[0]</Signal>
             </Bus>
-            <Bus capture_enable="true" name="PS2_B[5:0]">
-                <Signal>PS2_B[5]</Signal>
-                <Signal>PS2_B[4]</Signal>
-                <Signal>PS2_B[3]</Signal>
-                <Signal>PS2_B[2]</Signal>
-                <Signal>PS2_B[1]</Signal>
-                <Signal>PS2_B[0]</Signal>
+            <Signal capture_enable="true">modedetect/ceEvery2</Signal>
+            <Signal capture_enable="true">modedetect/ceEvery4</Signal>
+            <Signal capture_enable="true">clockEnable</Signal>
+            <Bus capture_enable="true" name="yOffset[9:0]">
+                <Signal>yOffset[9]</Signal>
+                <Signal>yOffset[8]</Signal>
+                <Signal>yOffset[7]</Signal>
+                <Signal>yOffset[6]</Signal>
+                <Signal>yOffset[5]</Signal>
+                <Signal>yOffset[4]</Signal>
+                <Signal>yOffset[3]</Signal>
+                <Signal>yOffset[2]</Signal>
+                <Signal>yOffset[1]</Signal>
+                <Signal>yOffset[0]</Signal>
+            </Bus>
+            <Bus capture_enable="true" name="ySize[9:0]">
+                <Signal>ySize[9]</Signal>
+                <Signal>ySize[8]</Signal>
+                <Signal>ySize[7]</Signal>
+                <Signal>ySize[6]</Signal>
+                <Signal>ySize[5]</Signal>
+                <Signal>ySize[4]</Signal>
+                <Signal>ySize[3]</Signal>
+                <Signal>ySize[2]</Signal>
+                <Signal>ySize[1]</Signal>
+                <Signal>ySize[0]</Signal>
             </Bus>
         </SignalList>
         <Triggers>
             <Trigger index="0">
                 <SignalList>
-                    <Signal>PS2_VSYNC</Signal>
+                    <Bus restorename="pixel_y[9:0]">
+                        <Signal>pixel_y[9]</Signal>
+                        <Signal>pixel_y[8]</Signal>
+                        <Signal>pixel_y[7]</Signal>
+                        <Signal>pixel_y[6]</Signal>
+                        <Signal>pixel_y[5]</Signal>
+                        <Signal>pixel_y[4]</Signal>
+                        <Signal>pixel_y[3]</Signal>
+                        <Signal>pixel_y[2]</Signal>
+                        <Signal>pixel_y[1]</Signal>
+                        <Signal>pixel_y[0]</Signal>
+                    </Bus>
                 </SignalList>
             </Trigger>
             <Trigger index="1"/>
@@ -116,7 +130,7 @@
             <Trigger index="15"/>
         </Triggers>
         <MatchUnits>
-            <MatchUnit index="0" enabled="1" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="1" value1="0" trigger="0"/>
+            <MatchUnit index="0" enabled="1" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="0011001000" value1="0000000000" trigger="0"/>
             <MatchUnit index="1" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
             <MatchUnit index="2" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
             <MatchUnit index="3" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
@@ -137,5 +151,5 @@
             <Expression>M0</Expression>
         </Expressions>
     </AoCore>
-    <GAO_ID>1000010010010101</GAO_ID>
+    <GAO_ID>0010011011111110</GAO_ID>
 </GAO_CONFIG>

@@ -48,6 +48,7 @@ reg [3:0] rx_bit_count;
 reg       byteRxDone;
 reg [7:0] latchedByte;
 wire [7:0] response = rx_byte + 8'h01;
+reg[9:0] ySize;
 
 always @(posedge SPI_CLK or posedge SPI_CS) begin
     if (SPI_CS) begin
@@ -163,7 +164,7 @@ always @(posedge LCD_PCLK) begin
     oldDe <= LCD_DE;
 
     if (oldDe && !LCD_DE) begin 
-        lineRequested <= v_pos + 10'd1;
+        lineRequested <= ((v_pos + 10'd1) * (ySize + 1))/600;
         sdramReadReq <= 1;
     end
     if (sdramReadAck) begin 
@@ -239,7 +240,7 @@ always @(posedge PS2_PCLK) begin
     oldHs <= PS2_HSYNC;
     if (oldHs && !PS2_HSYNC) begin 
         ps2CommitReq <= 1;
-        ps2LineToCommit <= pixel_y + 10'd1;
+        ps2LineToCommit <= pixel_y -yOffset + 10'd1;
     end
     if (ps2CommitAck) begin 
         ps2CommitReq <=0;
@@ -265,12 +266,12 @@ screen_line screen_line(
         .cea(vramWrEn), //input cea
         .reseta(1'b0), //input reseta
         .clkb(LCD_PCLK), //input clkb
-        .ceb(LCD_DE), //input ceb
+        .ceb(1), //input ceb
         .resetb(1'b0), //input resetb
         .oce(1'b1), //input oce
         .ada(xPosOut), //input [8:0] ada
         .din(rgbOut), //input [31:0] din
-        .adb(h_pos) //input [9:0] adb
+        .adb(((LCD_DE ? h_pos + 2 : 0) * activePixels)/1024 ) //input [9:0] adb
     );
 
 
@@ -307,11 +308,12 @@ sdram_interface sdr_interface (
     .IO_sdram_dq
 );
 
+ wire clockEnable;
 
 ps2_line_ram line_ram_ps2(
         .dout(fifoDataIn), //output [17:0] dout
         .clka(PS2_PCLK), //input clka
-        .cea(video_de && halfpclk ), //input cea
+        .cea(video_de && clockEnable  && pixel_x <1024), //input cea
         .reseta(!PS2_VSYNC), //input reseta
         .clkb(sdram_clk), //input clkb  
         .ceb(fifoRdEn), //input ceb
@@ -322,12 +324,26 @@ ps2_line_ram line_ram_ps2(
         //.din(pixel_x),
         .adb(writeXptr) //input [9:0] adb
     );
-
-
+wire [11:0] frontPorch;
+wire [11:0] activePixels;
+mode_detector modedetect(
+    .clk(PS2_PCLK),
+    
+    .hsync(PS2_HSYNC),
+    .vsync(PS2_VSYNC),
+    
+    //.activeMode,
+    .clockEnable,
+    .frontPorch,
+    .activePixels
+);
+reg[9:0] yOffset;
+reg shouldRecheckYOffset;
+reg[9:0] lastActiveLine;
 always @(posedge PS2_PCLK) begin
     halfpclk <= ~halfpclk;
 
-    if (halfpclk) begin
+    if (clockEnable) begin
 
         // New line
         if (!prev_hs && PS2_HSYNC) begin
@@ -340,9 +356,10 @@ always @(posedge PS2_PCLK) begin
             h_count <= h_count + 1'b1;
 
             // 62 clocks of back porch, then 704 active pixels
-            if ((h_count >= 61) && (h_count < 61 + 704)) begin
+            if ((h_count >= frontPorch) && (h_count < frontPorch + activePixels)) begin
                 video_de <= 1'b1;
-                pixel_x <= h_count - 61;
+                pixel_x <= h_count - frontPorch;
+                if (PS2_R || PS2_G || PS2_B) lastActiveLine <= pixel_y;
             end
             else begin
                 video_de <= 1'b0;
@@ -352,7 +369,14 @@ always @(posedge PS2_PCLK) begin
         // New frame
         if (!prev_vs && PS2_VSYNC) begin
             pixel_y <= 0;
+            shouldRecheckYOffset <= 1;
+            ySize <= lastActiveLine - yOffset;
         end
+
+        if(shouldRecheckYOffset&& (PS2_R || PS2_G || PS2_B)) begin 
+            yOffset <= pixel_y;
+            shouldRecheckYOffset <= 0;
+        end 
 
         prev_hs <= PS2_HSYNC;
         prev_vs <= PS2_VSYNC;

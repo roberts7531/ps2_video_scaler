@@ -18,6 +18,10 @@
    "Type" : "verilog"
   },
   {
+   "Path" : "/home/roberts7531/ps2_video_scaler/src/ps2_mode_detect.sv",
+   "Type" : "verilog"
+  },
+  {
    "Path" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
    "Type" : "verilog"
   },

@@ -9,7 +9,7 @@
   "SubInsts" : [
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 124,
+    "InstLine" : 125,
     "InstName" : "lcdtiming",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/lcd_timing.sv",
     "ModuleLine" : 1,
@@ -17,7 +17,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 152,
+    "InstLine" : 153,
     "InstName" : "lcd_pll",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_rpll/pll_lcd.v",
     "ModuleLine" : 10,
@@ -25,7 +25,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 251,
+    "InstLine" : 252,
     "InstName" : "sdr_pll",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_pll/sdram_pll.v",
     "ModuleLine" : 10,
@@ -33,7 +33,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 262,
+    "InstLine" : 263,
     "InstName" : "screen_line",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v",
     "ModuleLine" : 10,
@@ -41,7 +41,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 281,
+    "InstLine" : 282,
     "InstName" : "sdr_interface",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv",
     "ModuleLine" : 1,
@@ -69,11 +69,19 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 311,
+    "InstLine" : 313,
     "InstName" : "line_ram_ps2",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb/ps2_line_ram.v",
     "ModuleLine" : 10,
     "ModuleName" : "ps2_line_ram"
+   },
+   {
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 329,
+    "InstName" : "modedetect",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/ps2_mode_detect.sv",
+    "ModuleLine" : 10,
+    "ModuleName" : "mode_detector"
    }
   ]
  }

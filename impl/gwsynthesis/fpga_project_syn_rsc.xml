@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Module name="scaler_top" Register="145" Alu="42" Lut="87" Bsram="1" T_Register="1100(145)" T_Alu="72(42)" T_Lut="1015(87)" T_Bsram="30(1)">
- <SubModule name="lcdtiming" Register="21" Lut="25" T_Register="21(21)" T_Lut="25(25)"/>
- <SubModule name="gw_gao_inst_0" Register="685" Alu="15" Lut="556" Bsram="27" T_Register="685(685)" T_Alu="15(15)" T_Lut="556(556)" T_Bsram="27(27)"/>
+<Module name="scaler_top" Register="176" Alu="85" Lut="325" PADD18="1" MULT18X18="2" Bsram="1" T_Register="1076(176)" T_Alu="127(85)" T_Lut="1277(325)" T_PADD18="1(1)" T_MULT18X18="2(2)" T_Bsram="42(1)">
+ <SubModule name="lcdtiming" Register="21" Lut="26" T_Register="21(21)" T_Lut="26(26)"/>
  <SubModule name="lcd_pll"/>
  <SubModule name="sdr_pll"/>
  <SubModule name="screen_line" Bsram="1" T_Bsram="1(1)"/>
- <SubModule name="sdr_interface" Register="91" Lut="99" T_Register="249(91)" T_Alu="15(0)" T_Lut="347(99)">
+ <SubModule name="sdr_interface" Register="91" Lut="104" T_Register="249(91)" T_Alu="15(0)" T_Lut="352(104)">
   <SubModule name="sdrc" Register="158" Alu="15" Lut="248" T_Register="158(158)" T_Alu="15(15)" T_Lut="248(248)"/>
  </SubModule>
  <SubModule name="line_ram_ps2" Bsram="1" T_Bsram="1(1)"/>
+ <SubModule name="modedetect" Register="31" Alu="11" Lut="28" T_Register="31(31)" T_Alu="11(11)" T_Lut="28(28)"/>
+ <SubModule name="gw_gao_inst_0" Register="599" Alu="16" Lut="546" Bsram="39" T_Register="599(599)" T_Alu="16(16)" T_Lut="546(546)" T_Bsram="39(39)"/>
 </Module>
