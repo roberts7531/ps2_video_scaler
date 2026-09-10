@@ -1,249 +1,150 @@
 module gw_gao(
-    PS2_HSYNC,
-    PS2_VSYNC,
-    \PS2_R[5] ,
-    \PS2_R[4] ,
-    \PS2_R[3] ,
-    \PS2_R[2] ,
-    \PS2_R[1] ,
-    \PS2_R[0] ,
-    \h_count[15] ,
-    \h_count[14] ,
-    \h_count[13] ,
-    \h_count[12] ,
-    \h_count[11] ,
-    \h_count[10] ,
-    \h_count[9] ,
-    \h_count[8] ,
-    \h_count[7] ,
-    \h_count[6] ,
-    \h_count[5] ,
-    \h_count[4] ,
-    \h_count[3] ,
-    \h_count[2] ,
-    \h_count[1] ,
-    \h_count[0] ,
-    \v_count[15] ,
-    \v_count[14] ,
-    \v_count[13] ,
-    \v_count[12] ,
-    \v_count[11] ,
-    \v_count[10] ,
-    \v_count[9] ,
-    \v_count[8] ,
-    \v_count[7] ,
-    \v_count[6] ,
-    \v_count[5] ,
-    \v_count[4] ,
-    \v_count[3] ,
-    \v_count[2] ,
-    \v_count[1] ,
-    \v_count[0] ,
-    \pixel_y[9] ,
-    \pixel_y[8] ,
-    \pixel_y[7] ,
-    \pixel_y[6] ,
-    \pixel_y[5] ,
-    \pixel_y[4] ,
-    \pixel_y[3] ,
-    \pixel_y[2] ,
-    \pixel_y[1] ,
-    \pixel_y[0] ,
-    video_de,
-    \modedetect/activeMode[2] ,
-    \modedetect/activeMode[1] ,
-    \modedetect/activeMode[0] ,
-    \modedetect/ceEvery2 ,
-    \modedetect/ceEvery4 ,
-    clockEnable,
-    \yOffset[9] ,
-    \yOffset[8] ,
-    \yOffset[7] ,
-    \yOffset[6] ,
-    \yOffset[5] ,
-    \yOffset[4] ,
-    \yOffset[3] ,
-    \yOffset[2] ,
-    \yOffset[1] ,
-    \yOffset[0] ,
-    \ySize[9] ,
-    \ySize[8] ,
-    \ySize[7] ,
-    \ySize[6] ,
-    \ySize[5] ,
-    \ySize[4] ,
-    \ySize[3] ,
-    \ySize[2] ,
-    \ySize[1] ,
-    \ySize[0] ,
-    PS2_PCLK,
+    \h_pos[10] ,
+    \h_pos[9] ,
+    \h_pos[8] ,
+    \h_pos[7] ,
+    \h_pos[6] ,
+    \h_pos[5] ,
+    \h_pos[4] ,
+    \h_pos[3] ,
+    \h_pos[2] ,
+    \h_pos[1] ,
+    \h_pos[0] ,
+    \screenData[15] ,
+    \screenData[14] ,
+    \screenData[13] ,
+    \screenData[12] ,
+    \screenData[11] ,
+    \screenData[10] ,
+    \screenData[9] ,
+    \screenData[8] ,
+    \screenData[7] ,
+    \screenData[6] ,
+    \screenData[5] ,
+    \screenData[4] ,
+    \screenData[3] ,
+    \screenData[2] ,
+    \screenData[1] ,
+    \screenData[0] ,
+    \screenData2[15] ,
+    \screenData2[14] ,
+    \screenData2[13] ,
+    \screenData2[12] ,
+    \screenData2[11] ,
+    \screenData2[10] ,
+    \screenData2[9] ,
+    \screenData2[8] ,
+    \screenData2[7] ,
+    \screenData2[6] ,
+    \screenData2[5] ,
+    \screenData2[4] ,
+    \screenData2[3] ,
+    \screenData2[2] ,
+    \screenData2[1] ,
+    \screenData2[0] ,
+    LCD_DE,
+    LCD_PCLK,
     tms_pad_i,
     tck_pad_i,
     tdi_pad_i,
     tdo_pad_o
 );
 
-input PS2_HSYNC;
-input PS2_VSYNC;
-input \PS2_R[5] ;
-input \PS2_R[4] ;
-input \PS2_R[3] ;
-input \PS2_R[2] ;
-input \PS2_R[1] ;
-input \PS2_R[0] ;
-input \h_count[15] ;
-input \h_count[14] ;
-input \h_count[13] ;
-input \h_count[12] ;
-input \h_count[11] ;
-input \h_count[10] ;
-input \h_count[9] ;
-input \h_count[8] ;
-input \h_count[7] ;
-input \h_count[6] ;
-input \h_count[5] ;
-input \h_count[4] ;
-input \h_count[3] ;
-input \h_count[2] ;
-input \h_count[1] ;
-input \h_count[0] ;
-input \v_count[15] ;
-input \v_count[14] ;
-input \v_count[13] ;
-input \v_count[12] ;
-input \v_count[11] ;
-input \v_count[10] ;
-input \v_count[9] ;
-input \v_count[8] ;
-input \v_count[7] ;
-input \v_count[6] ;
-input \v_count[5] ;
-input \v_count[4] ;
-input \v_count[3] ;
-input \v_count[2] ;
-input \v_count[1] ;
-input \v_count[0] ;
-input \pixel_y[9] ;
-input \pixel_y[8] ;
-input \pixel_y[7] ;
-input \pixel_y[6] ;
-input \pixel_y[5] ;
-input \pixel_y[4] ;
-input \pixel_y[3] ;
-input \pixel_y[2] ;
-input \pixel_y[1] ;
-input \pixel_y[0] ;
-input video_de;
-input \modedetect/activeMode[2] ;
-input \modedetect/activeMode[1] ;
-input \modedetect/activeMode[0] ;
-input \modedetect/ceEvery2 ;
-input \modedetect/ceEvery4 ;
-input clockEnable;
-input \yOffset[9] ;
-input \yOffset[8] ;
-input \yOffset[7] ;
-input \yOffset[6] ;
-input \yOffset[5] ;
-input \yOffset[4] ;
-input \yOffset[3] ;
-input \yOffset[2] ;
-input \yOffset[1] ;
-input \yOffset[0] ;
-input \ySize[9] ;
-input \ySize[8] ;
-input \ySize[7] ;
-input \ySize[6] ;
-input \ySize[5] ;
-input \ySize[4] ;
-input \ySize[3] ;
-input \ySize[2] ;
-input \ySize[1] ;
-input \ySize[0] ;
-input PS2_PCLK;
+input \h_pos[10] ;
+input \h_pos[9] ;
+input \h_pos[8] ;
+input \h_pos[7] ;
+input \h_pos[6] ;
+input \h_pos[5] ;
+input \h_pos[4] ;
+input \h_pos[3] ;
+input \h_pos[2] ;
+input \h_pos[1] ;
+input \h_pos[0] ;
+input \screenData[15] ;
+input \screenData[14] ;
+input \screenData[13] ;
+input \screenData[12] ;
+input \screenData[11] ;
+input \screenData[10] ;
+input \screenData[9] ;
+input \screenData[8] ;
+input \screenData[7] ;
+input \screenData[6] ;
+input \screenData[5] ;
+input \screenData[4] ;
+input \screenData[3] ;
+input \screenData[2] ;
+input \screenData[1] ;
+input \screenData[0] ;
+input \screenData2[15] ;
+input \screenData2[14] ;
+input \screenData2[13] ;
+input \screenData2[12] ;
+input \screenData2[11] ;
+input \screenData2[10] ;
+input \screenData2[9] ;
+input \screenData2[8] ;
+input \screenData2[7] ;
+input \screenData2[6] ;
+input \screenData2[5] ;
+input \screenData2[4] ;
+input \screenData2[3] ;
+input \screenData2[2] ;
+input \screenData2[1] ;
+input \screenData2[0] ;
+input LCD_DE;
+input LCD_PCLK;
 input tms_pad_i;
 input tck_pad_i;
 input tdi_pad_i;
 output tdo_pad_o;
 
-wire PS2_HSYNC;
-wire PS2_VSYNC;
-wire \PS2_R[5] ;
-wire \PS2_R[4] ;
-wire \PS2_R[3] ;
-wire \PS2_R[2] ;
-wire \PS2_R[1] ;
-wire \PS2_R[0] ;
-wire \h_count[15] ;
-wire \h_count[14] ;
-wire \h_count[13] ;
-wire \h_count[12] ;
-wire \h_count[11] ;
-wire \h_count[10] ;
-wire \h_count[9] ;
-wire \h_count[8] ;
-wire \h_count[7] ;
-wire \h_count[6] ;
-wire \h_count[5] ;
-wire \h_count[4] ;
-wire \h_count[3] ;
-wire \h_count[2] ;
-wire \h_count[1] ;
-wire \h_count[0] ;
-wire \v_count[15] ;
-wire \v_count[14] ;
-wire \v_count[13] ;
-wire \v_count[12] ;
-wire \v_count[11] ;
-wire \v_count[10] ;
-wire \v_count[9] ;
-wire \v_count[8] ;
-wire \v_count[7] ;
-wire \v_count[6] ;
-wire \v_count[5] ;
-wire \v_count[4] ;
-wire \v_count[3] ;
-wire \v_count[2] ;
-wire \v_count[1] ;
-wire \v_count[0] ;
-wire \pixel_y[9] ;
-wire \pixel_y[8] ;
-wire \pixel_y[7] ;
-wire \pixel_y[6] ;
-wire \pixel_y[5] ;
-wire \pixel_y[4] ;
-wire \pixel_y[3] ;
-wire \pixel_y[2] ;
-wire \pixel_y[1] ;
-wire \pixel_y[0] ;
-wire video_de;
-wire \modedetect/activeMode[2] ;
-wire \modedetect/activeMode[1] ;
-wire \modedetect/activeMode[0] ;
-wire \modedetect/ceEvery2 ;
-wire \modedetect/ceEvery4 ;
-wire clockEnable;
-wire \yOffset[9] ;
-wire \yOffset[8] ;
-wire \yOffset[7] ;
-wire \yOffset[6] ;
-wire \yOffset[5] ;
-wire \yOffset[4] ;
-wire \yOffset[3] ;
-wire \yOffset[2] ;
-wire \yOffset[1] ;
-wire \yOffset[0] ;
-wire \ySize[9] ;
-wire \ySize[8] ;
-wire \ySize[7] ;
-wire \ySize[6] ;
-wire \ySize[5] ;
-wire \ySize[4] ;
-wire \ySize[3] ;
-wire \ySize[2] ;
-wire \ySize[1] ;
-wire \ySize[0] ;
-wire PS2_PCLK;
+wire \h_pos[10] ;
+wire \h_pos[9] ;
+wire \h_pos[8] ;
+wire \h_pos[7] ;
+wire \h_pos[6] ;
+wire \h_pos[5] ;
+wire \h_pos[4] ;
+wire \h_pos[3] ;
+wire \h_pos[2] ;
+wire \h_pos[1] ;
+wire \h_pos[0] ;
+wire \screenData[15] ;
+wire \screenData[14] ;
+wire \screenData[13] ;
+wire \screenData[12] ;
+wire \screenData[11] ;
+wire \screenData[10] ;
+wire \screenData[9] ;
+wire \screenData[8] ;
+wire \screenData[7] ;
+wire \screenData[6] ;
+wire \screenData[5] ;
+wire \screenData[4] ;
+wire \screenData[3] ;
+wire \screenData[2] ;
+wire \screenData[1] ;
+wire \screenData[0] ;
+wire \screenData2[15] ;
+wire \screenData2[14] ;
+wire \screenData2[13] ;
+wire \screenData2[12] ;
+wire \screenData2[11] ;
+wire \screenData2[10] ;
+wire \screenData2[9] ;
+wire \screenData2[8] ;
+wire \screenData2[7] ;
+wire \screenData2[6] ;
+wire \screenData2[5] ;
+wire \screenData2[4] ;
+wire \screenData2[3] ;
+wire \screenData2[2] ;
+wire \screenData2[1] ;
+wire \screenData2[0] ;
+wire LCD_DE;
+wire LCD_PCLK;
 wire tms_pad_i;
 wire tck_pad_i;
 wire tdi_pad_i;
@@ -317,9 +218,9 @@ gw_con_top  u_icon_top(
 
 ao_top_0  u_la0_top(
     .control(control0[9:0]),
-    .trig0_i({\pixel_y[9] ,\pixel_y[8] ,\pixel_y[7] ,\pixel_y[6] ,\pixel_y[5] ,\pixel_y[4] ,\pixel_y[3] ,\pixel_y[2] ,\pixel_y[1] ,\pixel_y[0] }),
-    .data_i({PS2_HSYNC,PS2_VSYNC,\PS2_R[5] ,\PS2_R[4] ,\PS2_R[3] ,\PS2_R[2] ,\PS2_R[1] ,\PS2_R[0] ,\h_count[15] ,\h_count[14] ,\h_count[13] ,\h_count[12] ,\h_count[11] ,\h_count[10] ,\h_count[9] ,\h_count[8] ,\h_count[7] ,\h_count[6] ,\h_count[5] ,\h_count[4] ,\h_count[3] ,\h_count[2] ,\h_count[1] ,\h_count[0] ,\v_count[15] ,\v_count[14] ,\v_count[13] ,\v_count[12] ,\v_count[11] ,\v_count[10] ,\v_count[9] ,\v_count[8] ,\v_count[7] ,\v_count[6] ,\v_count[5] ,\v_count[4] ,\v_count[3] ,\v_count[2] ,\v_count[1] ,\v_count[0] ,\pixel_y[9] ,\pixel_y[8] ,\pixel_y[7] ,\pixel_y[6] ,\pixel_y[5] ,\pixel_y[4] ,\pixel_y[3] ,\pixel_y[2] ,\pixel_y[1] ,\pixel_y[0] ,video_de,\modedetect/activeMode[2] ,\modedetect/activeMode[1] ,\modedetect/activeMode[0] ,\modedetect/ceEvery2 ,\modedetect/ceEvery4 ,clockEnable,\yOffset[9] ,\yOffset[8] ,\yOffset[7] ,\yOffset[6] ,\yOffset[5] ,\yOffset[4] ,\yOffset[3] ,\yOffset[2] ,\yOffset[1] ,\yOffset[0] ,\ySize[9] ,\ySize[8] ,\ySize[7] ,\ySize[6] ,\ySize[5] ,\ySize[4] ,\ySize[3] ,\ySize[2] ,\ySize[1] ,\ySize[0] }),
-    .clk_i(PS2_PCLK)
+    .trig0_i(LCD_DE),
+    .data_i({\h_pos[10] ,\h_pos[9] ,\h_pos[8] ,\h_pos[7] ,\h_pos[6] ,\h_pos[5] ,\h_pos[4] ,\h_pos[3] ,\h_pos[2] ,\h_pos[1] ,\h_pos[0] ,\screenData[15] ,\screenData[14] ,\screenData[13] ,\screenData[12] ,\screenData[11] ,\screenData[10] ,\screenData[9] ,\screenData[8] ,\screenData[7] ,\screenData[6] ,\screenData[5] ,\screenData[4] ,\screenData[3] ,\screenData[2] ,\screenData[1] ,\screenData[0] ,\screenData2[15] ,\screenData2[14] ,\screenData2[13] ,\screenData2[12] ,\screenData2[11] ,\screenData2[10] ,\screenData2[9] ,\screenData2[8] ,\screenData2[7] ,\screenData2[6] ,\screenData2[5] ,\screenData2[4] ,\screenData2[3] ,\screenData2[2] ,\screenData2[1] ,\screenData2[0] }),
+    .clk_i(LCD_PCLK)
 );
 
 endmodule

@@ -6,59 +6,39 @@ Analyzing Verilog file '/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/scree
 Analyzing Verilog file '/home/roberts7531/ps2_video_scaler/src/lcd_timing.sv'
 Analyzing Verilog file '/home/roberts7531/ps2_video_scaler/src/ps2_mode_detect.sv'
 Analyzing Verilog file '/home/roberts7531/ps2_video_scaler/src/scaler_top.v'
-Undeclared symbol 'sdram_clk', assumed default net type 'wire'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":253)
-Undeclared symbol 'lock_o', assumed default net type 'wire'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":254)
-Undeclared symbol 'activePixels', assumed default net type 'wire'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":274)
-WARN  (EX3638) : 'activePixels' is already implicitly declared on line 274("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":328)
+Undeclared symbol 'sdram_clk', assumed default net type 'wire'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":303)
+Undeclared symbol 'lock_o', assumed default net type 'wire'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":304)
 Analyzing Verilog file '/home/roberts7531/ps2_video_scaler/src/sdram_controller_hs/sdram_controller_hs.v'
 Analyzing Verilog file '/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv'
 Undeclared symbol 'O_sdrc_init_done', assumed default net type 'wire'("/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv":73)
 Undeclared symbol 'O_sdrc_cmd_ack', assumed default net type 'wire'("/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv":74)
 Analyzing Verilog file '/home/roberts7531/ps2_video_scaler/src/sdram_pll/sdram_pll.v'
-Analyzing Verilog file '/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_crc32.v'
-Analyzing Verilog file '/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_match.v'
-Analyzing included file '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_match.v":374)
-Back to file '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_match.v":374)
-Analyzing Verilog file '/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_mem_ctrl.v'
-Analyzing included file '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_mem_ctrl.v":1256)
-Back to file '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_mem_ctrl.v":1256)
-Analyzing Verilog file '/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_top.v'
-Analyzing included file '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_top.v":3042)
-Back to file '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_top.v":3042)
-Analyzing Verilog file '/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_CON/gw_con_top.v'
-Analyzing included file '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_CON/gw_con_top.v":377)
-Back to file '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_CON/gw_con_top.v":377)
-Analyzing Verilog file '/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/gw_jtag.v'
-Analyzing Verilog file '/home/roberts7531/ps2_video_scaler/impl/gwsynthesis/RTL_GAO/gw_gao_top.v'
-WARN  (SYS-1203) : Column %u exceeds maximum value %u("/home/roberts7531/ps2_video_scaler/impl/gwsynthesis/RTL_GAO/gw_gao_top.v":321)
-WARN  (EX3073) : Port 'activeMode' remains unconnected for this instance("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":339)
-Compiling module 'pll_lcd'("/home/roberts7531/ps2_video_scaler/src/gowin_rpll/pll_lcd.v":10)
-Compiling module 'ps2_line_ram'("/home/roberts7531/ps2_video_scaler/src/gowin_sdpb/ps2_line_ram.v":10)
-Compiling module 'screen_line'("/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v":10)
-Compiling module 'lcd_timing'("/home/roberts7531/ps2_video_scaler/src/lcd_timing.sv":1)
-Compiling module 'mode_detector'("/home/roberts7531/ps2_video_scaler/src/ps2_mode_detect.sv":10)
+WARN  (EX3073) : Port 'activeMode' remains unconnected for this instance("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":533)
 Compiling module 'scaler_top'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":1)
 Extracting RAM for identifier 'vram'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":139)
-Extracting RAM for identifier 'line_ram'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":234)
-WARN  (EX3791) : Expression size 22 truncated to fit in target size 10("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":167)
+Extracting RAM for identifier 'line_ram'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":284)
+Compiling module 'lcd_timing'("/home/roberts7531/ps2_video_scaler/src/lcd_timing.sv":1)
+Compiling module 'pll_lcd'("/home/roberts7531/ps2_video_scaler/src/gowin_rpll/pll_lcd.v":10)
+WARN  (EX3791) : Expression size 20 truncated to fit in target size 10("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":182)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 10("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":188)
 Compiling module 'sdram_pll'("/home/roberts7531/ps2_video_scaler/src/sdram_pll/sdram_pll.v":10)
-WARN  (EX3670) : Actual bit length 32 differs from formal bit length 1 for port 'ceb'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":269)
-WARN  (EX3670) : Actual bit length 11 differs from formal bit length 9 for port 'ada'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":272)
-WARN  (EX3670) : Actual bit length 32 differs from formal bit length 10 for port 'adb'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":274)
+WARN  (EX3791) : Expression size 22 truncated to fit in target size 10("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":416)
+Compiling module 'screen_line'("/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v":10)
+WARN  (EX3670) : Actual bit length 32 differs from formal bit length 1 for port 'ceb'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":423)
+WARN  (EX3670) : Actual bit length 11 differs from formal bit length 9 for port 'ada'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":426)
+WARN  (EX3670) : Actual bit length 32 differs from formal bit length 1 for port 'ceb'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":437)
+WARN  (EX3670) : Actual bit length 11 differs from formal bit length 9 for port 'ada'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":440)
+WARN  (EX3670) : Actual bit length 32 differs from formal bit length 1 for port 'ceb'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":451)
+WARN  (EX3670) : Actual bit length 11 differs from formal bit length 9 for port 'ada'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":454)
+WARN  (EX3670) : Actual bit length 32 differs from formal bit length 1 for port 'ceb'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":465)
+WARN  (EX3670) : Actual bit length 11 differs from formal bit length 9 for port 'ada'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":468)
 Compiling module 'sdram_interface'("/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv":1)
 Compiling module 'SDRAM_Controller_HS_Top'("/home/roberts7531/ps2_video_scaler/src/sdram_controller_hs/sdram_controller_hs.v":1242)
 Compiling module '**'("/home/roberts7531/ps2_video_scaler/src/sdram_controller_hs/sdram_controller_hs.v":1241)
-WARN  (EX3670) : Actual bit length 11 differs from formal bit length 10 for port 'ada'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":322)
-WARN  (EX3791) : Expression size 16 truncated to fit in target size 11("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":361)
-Compiling module '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_crc32.v":74)
-Compiling module '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_match.v":374)
-Compiling module '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_mem_ctrl.v":1256)
-Extracting RAM for identifier '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_mem_ctrl.v":1256)
-Compiling module '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_AO_0/gw_ao_top.v":3042)
-Compiling module '**'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/GAO/GW_CON/gw_con_top.v":377)
-Compiling module 'GW_JTAG'("/home/roberts7531/Gowin_V1.9.9.01_linux/IDE/data/ipcores/gw_jtag.v":1)
-Compiling module 'gw_gao'("/home/roberts7531/ps2_video_scaler/impl/gwsynthesis/RTL_GAO/gw_gao_top.v":1)
-Trying to combine GAO to RTL design
+Compiling module 'ps2_line_ram'("/home/roberts7531/ps2_video_scaler/src/gowin_sdpb/ps2_line_ram.v":10)
+WARN  (EX3670) : Actual bit length 11 differs from formal bit length 10 for port 'ada'("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":516)
+Compiling module 'mode_detector'("/home/roberts7531/ps2_video_scaler/src/ps2_mode_detect.sv":10)
+WARN  (EX3791) : Expression size 16 truncated to fit in target size 11("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":555)
 NOTE  (EX0101) : Current top module is "scaler_top"
 WARN  (EX0211) : The output port "SPI_MISO" of module "scaler_top" has no driver, assigning undriven bits to Z, simulation mismatch possible("/home/roberts7531/ps2_video_scaler/src/scaler_top.v":31)
 [5%] Running netlist conversion ...
@@ -80,9 +60,9 @@ Running technical mapping ...
 [80%] Tech-Mapping Phase 3 completed
 [90%] Tech-Mapping Phase 4 completed
 [95%] Generate netlist file "/home/roberts7531/ps2_video_scaler/impl/gwsynthesis/fpga_project.vg" completed
-WARN  (CK3000) : Can't calculate clocks' relationship between: "PS2_PCLK" and "lcd_pll/rpll_inst/CLKOUT.default_gen_clk"
-WARN  (CK3000) : Can't calculate clocks' relationship between: "n73_6" and "lcd_pll/rpll_inst/CLKOUT.default_gen_clk"
+WARN  (CK3000) : Can't calculate clocks' relationship between: "n73_8" and "lcd_pll/rpll_inst/CLKOUT.default_gen_clk"
 WARN  (CK3000) : Can't calculate clocks' relationship between: "sdr_pll/rpll_inst/CLKOUT.default_gen_clk" and "PS2_PCLK"
+WARN  (CK3000) : Can't calculate clocks' relationship between: "PS2_PCLK" and "lcd_pll/rpll_inst/CLKOUT.default_gen_clk"
 WARN  (CK3000) : Can't calculate clocks' relationship between: "PS2_PCLK" and "sdr_pll/rpll_inst/CLKOUT.default_gen_clk"
 [100%] Generate report file "/home/roberts7531/ps2_video_scaler/impl/gwsynthesis/fpga_project_syn.rpt.html" completed
 GowinSynthesis finish

@@ -1,0 +1,102 @@
+<?xml version="1" encoding="UTF-8"?>
+<GAO_CONFIG>
+    <Version>3.0</Version>
+    <Mode>Standard</Mode>
+    <AoCore index="0" sample_clock="LCD_PCLK" trig_type="0" storage_depth="8192" window_num="1" capture_amount="8192" implementation="0" trigger_pos="0" module_name="scaler_top" force_trigger_by_falling_edge="false" capture_init_data_enabled="false">
+        <SignalList>
+            <Bus capture_enable="true" name="h_pos[10:0]">
+                <Signal>h_pos[10]</Signal>
+                <Signal>h_pos[9]</Signal>
+                <Signal>h_pos[8]</Signal>
+                <Signal>h_pos[7]</Signal>
+                <Signal>h_pos[6]</Signal>
+                <Signal>h_pos[5]</Signal>
+                <Signal>h_pos[4]</Signal>
+                <Signal>h_pos[3]</Signal>
+                <Signal>h_pos[2]</Signal>
+                <Signal>h_pos[1]</Signal>
+                <Signal>h_pos[0]</Signal>
+            </Bus>
+            <Bus capture_enable="true" name="screenData[15:0]">
+                <Signal>screenData[15]</Signal>
+                <Signal>screenData[14]</Signal>
+                <Signal>screenData[13]</Signal>
+                <Signal>screenData[12]</Signal>
+                <Signal>screenData[11]</Signal>
+                <Signal>screenData[10]</Signal>
+                <Signal>screenData[9]</Signal>
+                <Signal>screenData[8]</Signal>
+                <Signal>screenData[7]</Signal>
+                <Signal>screenData[6]</Signal>
+                <Signal>screenData[5]</Signal>
+                <Signal>screenData[4]</Signal>
+                <Signal>screenData[3]</Signal>
+                <Signal>screenData[2]</Signal>
+                <Signal>screenData[1]</Signal>
+                <Signal>screenData[0]</Signal>
+            </Bus>
+            <Bus capture_enable="true" name="screenData2[15:0]">
+                <Signal>screenData2[15]</Signal>
+                <Signal>screenData2[14]</Signal>
+                <Signal>screenData2[13]</Signal>
+                <Signal>screenData2[12]</Signal>
+                <Signal>screenData2[11]</Signal>
+                <Signal>screenData2[10]</Signal>
+                <Signal>screenData2[9]</Signal>
+                <Signal>screenData2[8]</Signal>
+                <Signal>screenData2[7]</Signal>
+                <Signal>screenData2[6]</Signal>
+                <Signal>screenData2[5]</Signal>
+                <Signal>screenData2[4]</Signal>
+                <Signal>screenData2[3]</Signal>
+                <Signal>screenData2[2]</Signal>
+                <Signal>screenData2[1]</Signal>
+                <Signal>screenData2[0]</Signal>
+            </Bus>
+        </SignalList>
+        <Triggers>
+            <Trigger index="0">
+                <SignalList>
+                    <Signal>LCD_DE</Signal>
+                </SignalList>
+            </Trigger>
+            <Trigger index="1"/>
+            <Trigger index="2"/>
+            <Trigger index="3"/>
+            <Trigger index="4"/>
+            <Trigger index="5"/>
+            <Trigger index="6"/>
+            <Trigger index="7"/>
+            <Trigger index="8"/>
+            <Trigger index="9"/>
+            <Trigger index="10"/>
+            <Trigger index="11"/>
+            <Trigger index="12"/>
+            <Trigger index="13"/>
+            <Trigger index="14"/>
+            <Trigger index="15"/>
+        </Triggers>
+        <MatchUnits>
+            <MatchUnit index="0" enabled="1" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="1" value1="0" trigger="0"/>
+            <MatchUnit index="1" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="2" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="3" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="4" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="5" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="6" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="7" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="8" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="9" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="10" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="11" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="12" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="13" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="14" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+            <MatchUnit index="15" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
+        </MatchUnits>
+        <Expressions type="Static">
+            <Expression>M0</Expression>
+        </Expressions>
+    </AoCore>
+    <GAO_ID>1000000101011100</GAO_ID>
+</GAO_CONFIG>

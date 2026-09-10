@@ -25,7 +25,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 252,
+    "InstLine" : 302,
     "InstName" : "sdr_pll",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_pll/sdram_pll.v",
     "ModuleLine" : 10,
@@ -33,7 +33,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 263,
+    "InstLine" : 417,
     "InstName" : "screen_line",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v",
     "ModuleLine" : 10,
@@ -41,7 +41,31 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 282,
+    "InstLine" : 431,
+    "InstName" : "screen_line_xp1",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v",
+    "ModuleLine" : 10,
+    "ModuleName" : "screen_line"
+   },
+   {
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 445,
+    "InstName" : "screen_line_yp1",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v",
+    "ModuleLine" : 10,
+    "ModuleName" : "screen_line"
+   },
+   {
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 459,
+    "InstName" : "screen_line_xp1_yp1",
+    "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb2/screen_line.v",
+    "ModuleLine" : 10,
+    "ModuleName" : "screen_line"
+   },
+   {
+    "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
+    "InstLine" : 476,
     "InstName" : "sdr_interface",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/sdram_interface.sv",
     "ModuleLine" : 1,
@@ -69,7 +93,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 313,
+    "InstLine" : 507,
     "InstName" : "line_ram_ps2",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/gowin_sdpb/ps2_line_ram.v",
     "ModuleLine" : 10,
@@ -77,7 +101,7 @@
    },
    {
     "InstFile" : "/home/roberts7531/ps2_video_scaler/src/scaler_top.v",
-    "InstLine" : 329,
+    "InstLine" : 523,
     "InstName" : "modedetect",
     "ModuleFile" : "/home/roberts7531/ps2_video_scaler/src/ps2_mode_detect.sv",
     "ModuleLine" : 10,
