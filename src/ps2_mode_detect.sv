@@ -14,6 +14,7 @@ module mode_detector (
     input vsync,
     
     output logic [2:0] activeMode,
+    output logic isInterlaced,
     output logic clockEnable,
     output logic [11:0] frontPorch,
     output logic [11:0] activePixels,
@@ -40,9 +41,6 @@ logic [1:0] ceCnt;
 logic ceEvery2;
 logic ceEvery4;
 
-//assign clockEnable = (activeMode == MODE_480P || activeMode == MODE_576P) ? ceEvery2 :
-//                     (activeMode == MODE_480I || activeMode == MODE_576I) ? ceEvery4 : 
-//                     (activeMode == MODE_720P) ? 1'b1 : 1'b0;
 
 
 always_comb begin 
@@ -53,26 +51,31 @@ always_comb begin
         activePixels = 12'd704;
         yStartMax = 10'd40;
         yStopMin = 10'd496;
+        isInterlaced = 1'b0;
     end
     MODE_576P: begin
         clockEnable = ceEvery2;
         frontPorch = 12'd68;
         activePixels = 12'd704;
+        isInterlaced = 1'b0;
     end
     MODE_480I: begin 
         clockEnable = ceEvery4;
         frontPorch = 12'd63;
         activePixels = 12'd704;
+        isInterlaced = 1'b1;
     end
     MODE_576I: begin 
         clockEnable = ceEvery4;
         frontPorch = 12'd68;
         activePixels = 12'd704;
+        isInterlaced = 1'b1;
     end
     MODE_720P: begin 
         clockEnable = 1'b1;
         frontPorch = 12'd210 + 12'd110; // cropping to fit into 1024 wide
         activePixels = 12'd1024;
+        isInterlaced = 1'b0;
     end
     default: begin 
         clockEnable = 1'b0;
@@ -80,6 +83,7 @@ always_comb begin
         activePixels = 12'd704;
         yStartMax = 12'd0;
         yStopMin = 12'd600;
+        isInterlaced = 1'b0;
     end
 
     endcase

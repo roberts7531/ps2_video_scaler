@@ -9,13 +9,13 @@ module sdram_interface (
     output reg     sdramReadAck,
 
 
-    input [9:0] ps2LineToCommit,
-    input       ps2CommitReq,
-    output reg  ps2CommitAck,
-    
-    output reg fifoRdEn,
-    input [31:0] fifoDataIn,
-    output reg [8:0] writeXptr,
+    input [9:0] lineToSaveYpos,
+    input       lineSaveReq,
+    output reg  lineSaveAck,
+    output reg lineSaveRdEn,
+    input [31:0] lineSaveReadData,
+    output reg [8:0] lineSaveReadAddr,
+
     output O_sdram_clk,
     output O_sdram_cke,
     output O_sdram_cs_n,
@@ -34,7 +34,7 @@ always @(posedge clk) begin
     readReqSync2 <= sdramReadReq;
     readReqSync <= readReqSync2;
 
-    writeReqSync2 <= ps2CommitReq;
+    writeReqSync2 <= lineSaveReq;
     writeReqSync <= writeReqSync2;
 end
 
@@ -43,7 +43,6 @@ logic [20:0] I_sdrc_addr;
 logic [2:0]  I_sdrc_cmd;
 logic I_sdrc_cmd_en;
 wire [31:0] O_sdrc_data;
-logic [31:0] I_sdrc_data;
 SDRAM_Controller_HS_Top sdrc(
 		.O_sdram_clk, //output O_sdram_clk
 		.O_sdram_cke, //output O_sdram_cke
@@ -67,7 +66,7 @@ SDRAM_Controller_HS_Top sdrc(
 		.I_sdram_selfrefresh(1'b0), //input I_sdram_selfrefresh
 		.I_sdrc_addr(I_sdrc_addr), //input [20:0] I_sdrc_addr
 		.I_sdrc_dqm(4'b0000), //input [3:0] I_sdrc_dqm
-		.I_sdrc_data(fifoDataIn), //input [31:0] I_sdrc_data
+		.I_sdrc_data(lineSaveReadData), //input [31:0] I_sdrc_data
 		.I_sdrc_data_len(8'hff), //input [7:0] I_sdrc_data_len
 		.O_sdrc_data(O_sdrc_data), //output [31:0] O_sdrc_data
 		.O_sdrc_init_done(O_sdrc_init_done), //output O_sdrc_init_done
@@ -129,7 +128,7 @@ always @(posedge clk) begin
                end else if (writeReqSync) begin 
                     sdram_fsm_state <= ACTIVATE_LINE_WRITE;
                     I_sdrc_cmd_en <= 1;
-                    I_sdrc_addr <= {ps2LineToCommit,1'b0,8'd0};
+                    I_sdrc_addr <= {lineToSaveYpos,1'b0,8'd0};
                     currentBurst <= 0;
                end
             end
@@ -177,25 +176,23 @@ always @(posedge clk) begin
                 
             end
             ACTIVATE_LINE_WRITE: begin 
-                fifoRdEn <=1;
-                writeXptr <= {currentBurst,burstLen};
+                lineSaveRdEn <=1;
+                lineSaveReadAddr <= {currentBurst,burstLen};
                 if (O_sdrc_cmd_ack) begin 
-                    I_sdrc_addr <= {ps2LineToCommit,currentBurst,8'd0};//(ps2LineToCommit << 10) + (ps2LineToCommit << 8) + (currentBurst << 8);
+                    I_sdrc_addr <= {lineToSaveYpos,currentBurst,8'd0};//(ps2LineToCommit << 10) + (ps2LineToCommit << 8) + (currentBurst << 8);
                     I_sdrc_cmd <= WRITE_CMD;
-                    I_sdrc_data <= fifoDataIn;
-                    writeXptr <= {currentBurst,burstLen}+9'd1;
+                    lineSaveReadAddr <= {currentBurst,burstLen}+9'd1;
                     I_sdrc_cmd_en <= 1;
                     sdram_fsm_state <= WRITE_LINE;
                     burstLen <= 0;
-                    fifoRdEn <= 1;
+                    lineSaveRdEn <= 1;
                 end
             end 
             WRITE_LINE: begin 
-                I_sdrc_data <= fifoDataIn;
-                writeXptr <= {currentBurst,burstLen}+9'd2;
+                lineSaveReadAddr <= {currentBurst,burstLen}+9'd2;
                 if (burstLen == 8'hff) begin 
                     burstLen <= 0; 
-                    fifoRdEn <=0;
+                    lineSaveRdEn <=0;
                     
                     sdram_fsm_state <= WAIT_WRITE_DONE;
 
@@ -207,11 +204,11 @@ always @(posedge clk) begin
             end
             END_WRITE_LINE: begin 
                 if (currentBurst == 1'b1) begin 
-                    ps2CommitAck <= 1;
+                    lineSaveAck <= 1;
                     
                     if(~writeReqSync) begin 
                         currentBurst <= 0;
-                        ps2CommitAck <= 0;
+                        lineSaveAck <= 0;
                         sdram_fsm_state <= IDLE;
                     end
                 end else begin 
@@ -220,7 +217,7 @@ always @(posedge clk) begin
                     I_sdrc_cmd <= ACT_CMD;
                     I_sdrc_cmd_en <= 1;
                     burstLen <= 0;
-                    I_sdrc_addr <= {ps2LineToCommit,1'b1,8'd0};
+                    I_sdrc_addr <= {lineToSaveYpos,1'b1,8'd0};
 
                 end
             end

@@ -42,13 +42,11 @@ module scaler_top (
     output [1:0] O_sdram_ba,
     inout [31:0] IO_sdram_dq
 );
-reg [7:0] tx_byte;
 reg [7:0] rx_byte;
 reg [3:0] rx_bit_count;
 reg       byteRxDone;
 reg [7:0] latchedByte;
-wire [7:0] response = rx_byte + 8'h01;
-reg[9:0] ySize;
+wire [9:0] ySize;
 
 always @(posedge SPI_CLK or posedge SPI_CS) begin
     if (SPI_CS) begin
@@ -147,25 +145,20 @@ always @(posedge LCD_PCLK) begin
         vram[write_addr] <= write_data;
     end
 end
+localparam reg [6:0] backlightLev = 7'd3;
 
-localparam reg [6:0] backlight = 7'd3;
-reg [6:0] bl_counter;
+backlight_control backlight (
+    .clk(LCD_PCLK),
+    .backlightLevel(backlightLev),
+    .backlightPwm(LCD_BL)
+)
 
-always @(posedge LCD_PCLK) begin
-    bl_counter <= bl_counter + 1'b1;
-
-    if (bl_counter >= backlight)
-        LCD_BL <= 1'b0;
-    else
-        LCD_BL <= 1'b1;
-end
 pll_lcd lcd_pll(
         .clkout(LCD_PCLK), //output clkout
         .clkin(clk27) //input clkin
     );
 
 
-reg oldDe;
 reg [9:0] lineRequested;
 reg sdramReadReq;
 wire sdramReadAck;
@@ -188,13 +181,11 @@ always @(posedge LCD_PCLK) begin
     
     ackSync2 <= sdramReadAck;
     ackSync <= ackSync2;
-    //if (h_pos == 1024) y_frac_d <= ((y_acc % 600) * 1024) / 600;
 
     case(lreq_state) 
         IDLE: begin 
-            if (h_pos == 800) begin //oldDe && !LCD_DE) begin 
+            if (h_pos == 800) begin 
                 activeBuffer <= 0;
-                //lineRequested <=  v_pos+1;//(y_acc/600) -1;
                 lineRequested <= y_acc[31:10] - 1;
 
                 sdramReadReq <= 1;
@@ -242,6 +233,10 @@ always @(*) begin
     else
         osd_pixel = 1'b0;
 end
+
+wire [5:0] r_final;
+wire [5:0] g_final;
+wire [5:0] b_final;
 always @(posedge LCD_PCLK) begin
     if (LCD_DE) begin
         if (osd_pixel) begin
@@ -249,53 +244,13 @@ always @(posedge LCD_PCLK) begin
             LCD_G <= 6'h3f;
             LCD_B <= 6'h3f;
         end else begin
-            LCD_R <= {r_final[14:10], 1'b0};
-            LCD_G <= g_final[15:10];
-            LCD_B <= {b_final[14:10], 1'b0};
-            //LCD_R <= osd_pixel ? 6'h3f : 8'd0;//{screenData[15:11], 1'b0};
-            //LCD_G <= osd_pixel ? 6'h3f : 8'd0;//screenData[10:5];
-             //LCD_B <= {screenData[4:0], 1'b0};
+            LCD_R <= r_final;
+            LCD_G <= g_final;
+            LCD_B <= b_final;
         end
     end
 end
-reg [15:0] h_total;
-reg [15:0] v_total;
 
-reg [15:0] h_count;
-reg [15:0] v_count;
-
-reg prev_hs;
-reg prev_vs;
-reg halfpclk;
-/*
-pix_clk_480p pixClk480p(
-        .clkout(PS2_480P_CLK), //output clkout
-        .hclkin(PS2_PCLK), //input hclkin
-        .resetn(1) //input resetn
-    );
-*/
-
-
-reg        video_de;
-reg [10:0] pixel_x;
-reg [9:0]  pixel_y;
-reg [5:0] line_ram [0:703];
-reg oldHs;
-wire ps2CommitAck;
-reg ps2CommitReq;
-reg [9:0] ps2LineToCommit;
-always @(posedge PS2_PCLK) begin
-    oldHs <= PS2_HSYNC;
-    if (oldHs && !PS2_HSYNC) begin 
-        ps2CommitReq <= 1;
-        ps2LineToCommit <= pixel_y -yOffset + 10'd1;
-    end
-    if (ps2CommitAck) begin 
-        ps2CommitReq <=0;
-    end
-
-
-end
 
 sdram_pll sdr_pll(
         .clkout(sdram_clk), //output clkout
@@ -307,13 +262,10 @@ wire [31:0] rgbOut;
 wire [10:0] xPosOut;
 wire vramWrEn; 
 
-wire [15:0] screenData;
-wire [15:0] screenData2;
-wire [15:0] screenData3;
-wire [15:0] screenData4;
+
 reg [31:0] x_acc;
 reg [31:0] y_acc;
-reg [31:0] y_step;
+wire [31:0] y_step;
 always @(posedge LCD_PCLK) begin 
     if (!LCD_DE) x_acc <= 0;
     else x_acc <= x_acc + activePixels;
@@ -334,162 +286,68 @@ wire [9:0] y_frac_d = y_acc[9:0];
 
 always @(posedge LCD_PCLK) begin
     frac_d   <= x_acc[9:0];
-  //  y_frac_d <= y_frac;
 end
 
-wire [9:0] frac = frac_d;
-
-
-// ------------------------------------------------------------
-// Horizontal interpolation - TOP LINE
-// ------------------------------------------------------------
-
-wire [4:0] r0 = screenData[15:11];
-wire [5:0] g0 = screenData[10:5];
-wire [4:0] b0 = screenData[4:0];
-
-wire [4:0] r1 = screenData2[15:11];
-wire [5:0] g1 = screenData2[10:5];
-wire [4:0] b1 = screenData2[4:0];
-
-wire [10:0] w0 = 11'd1024 - {1'b0, frac};
-wire [10:0] w1 = {1'b0, frac};
-
-wire [15:0] r_mix_top = r0 * w0 + r1 * w1;
-wire [16:0] g_mix_top = g0 * w0 + g1 * w1;
-wire [15:0] b_mix_top = b0 * w0 + b1 * w1;
-
-
-// ------------------------------------------------------------
-// Horizontal interpolation - BOTTOM LINE
-// ------------------------------------------------------------
-
-wire [4:0] r2 = screenData3[15:11];
-wire [5:0] g2 = screenData3[10:5];
-wire [4:0] b2 = screenData3[4:0];
-
-wire [4:0] r3 = screenData4[15:11];
-wire [5:0] g3 = screenData4[10:5];
-wire [4:0] b3 = screenData4[4:0];
-
-wire [15:0] r_mix_bottom = r2 * w0 + r3 * w1;
-wire [16:0] g_mix_bottom = g2 * w0 + g3 * w1;
-wire [15:0] b_mix_bottom = b2 * w0 + b3 * w1;
-
-
-// ------------------------------------------------------------
-// Convert horizontal results back to RGB565
-// ------------------------------------------------------------
-
-wire [4:0] r_top = r_mix_top[14:10];
-wire [5:0] g_top = g_mix_top[15:10];
-wire [4:0] b_top = b_mix_top[14:10];
-
-wire [4:0] r_bottom = r_mix_bottom[14:10];
-wire [5:0] g_bottom = g_mix_bottom[15:10];
-wire [4:0] b_bottom = b_mix_bottom[14:10];
-
-
-// ------------------------------------------------------------
-// Vertical interpolation
-// ------------------------------------------------------------
-
-wire [10:0] wy0 = 11'd1024 - {1'b0, y_frac_d};
-wire [10:0] wy1 = {1'b0, y_frac_d};
-
-wire [15:0] r_final =
-    r_top * wy0 +
-    r_bottom * wy1;
-
-wire [16:0] g_final =
-    g_top * wy0 +
-    g_bottom * wy1;
-
-wire [15:0] b_final =
-    b_top * wy0 +
-    b_bottom * wy1;
-
-
-
-
-
 wire [9:0] lcdReadAddr = x_acc[31:10];//(LCD_DE ? h_pos + 2 : 0);// * activePixels)/1024;
-screen_line screen_line(
-        .dout(screenData), //output [15:0] dout
-        .clka(sdram_clk), //input clka
-        .cea(vramWrEn && !activeBuffer), //input cea
-        .reseta(1'b0), //input reseta
-        .clkb(LCD_PCLK), //input clkb
-        .ceb(1), //input ceb
-        .resetb(1'b0), //input resetb
-        .oce(1'b1), //input oce
-        .ada(xPosOut), //input [8:0] ada
-        .din(rgbOut), //input [31:0] din
-        .adb(lcdReadAddr) //input [9:0] adb
-    );
+wire [15:0] pixel00;
+wire [15:0] pixel01;
+wire [15:0] pixel10;
+wire [15:0] pixel11;
+screen_bram_module screen_bram_module(
+    .readClk(LCD_PCLK),
+    .writeClk(sdram_clk),
 
-screen_line screen_line_xp1(
-        .dout(screenData2), //output [15:0] dout
-        .clka(sdram_clk), //input clka
-        .cea(vramWrEn && !activeBuffer), //input cea
-        .reseta(1'b0), //input reseta
-        .clkb(LCD_PCLK), //input clkb
-        .ceb(1), //input ceb
-        .resetb(1'b0), //input resetb
-        .oce(1'b1), //input oce
-        .ada(xPosOut), //input [8:0] ada
-        .din(rgbOut), //input [31:0] din
-        .adb(lcdReadAddr + 10'd1 ) //input [9:0] adb
-    );
+    .lcdReadAddr,
 
-screen_line screen_line_yp1(
-        .dout(screenData3), //output [15:0] dout
-        .clka(sdram_clk), //input clka
-        .cea(vramWrEn && activeBuffer), //input cea
-        .reseta(1'b0), //input reseta
-        .clkb(LCD_PCLK), //input clkb
-        .ceb(1), //input ceb
-        .resetb(1'b0), //input resetb
-        .oce(1'b1), //input oce
-        .ada(xPosOut), //input [8:0] ada
-        .din(rgbOut), //input [31:0] din
-        .adb(lcdReadAddr) //input [9:0] adb
-    );
+    .activeBuffer,
+    .wrEn(vramWrEn),
+    .writeAddr(xPosOut),
+    .dataIn(rgbOut),
 
-screen_line screen_line_xp1_yp1(
-        .dout(screenData4), //output [15:0] dout
-        .clka(sdram_clk), //input clka
-        .cea(vramWrEn && activeBuffer), //input cea
-        .reseta(1'b0), //input reseta
-        .clkb(LCD_PCLK), //input clkb
-        .ceb(1), //input ceb
-        .resetb(1'b0), //input resetb
-        .oce(1'b1), //input oce
-        .ada(xPosOut), //input [8:0] ada
-        .din(rgbOut), //input [31:0] din
-        .adb(lcdReadAddr + 10'd1 ) //input [9:0] adb
-    );
+    .pixel00,
+    .pixel01,
+    .pixel10,
+    .pixel11
+);
 
-wire [31:0] fifoDataIn;
-wire fifoRdEn;
-wire [8:0] writeXptr;
+bilinear_scaler scaler(
+    .pixel00,
+    .pixel01,
+    .pixel10,
+    .pixel11,
+    .xFrac(frac_d),
+    .yFrac(y_frac_d),
+
+    .rOut(r_final),
+    .gOut(g_final),
+    .bOut(b_final)
+); 
+
+wire [9:0] lineToSaveYpos;
+wire [31:0] lineSaveReadData;
+wire lineSaveReq;
+wire lineSaveAck;
+wire lineSaveRdEn;
+wire [8:0] lineSaveReadAddr;
 sdram_interface sdr_interface (
     .clk(sdram_clk),
-
+    //output port
     .lineRequested,
     .sdramReadReq,
     .sdramReadAck,
-
-    .ps2LineToCommit,
-    .ps2CommitReq,
-    .ps2CommitAck,
-        
     .rgbOut,
     .xPosOut,
     .vramWrEn,
-    .fifoRdEn,
-    .fifoDataIn,
-    .writeXptr,
+
+    //input port
+    .lineToSaveYpos,
+    .lineSaveReq,
+    .lineSaveAck,
+    .lineSaveRdEn,
+    .lineSaveReadData,
+    .lineSaveReadAddr,
+
+    //sdram interface
     .O_sdram_clk,
     .O_sdram_cke,
     .O_sdram_cs_n,
@@ -502,22 +360,7 @@ sdram_interface sdr_interface (
     .IO_sdram_dq
 );
 
- wire clockEnable;
-
-ps2_line_ram line_ram_ps2(
-        .dout(fifoDataIn), //output [17:0] dout
-        .clka(PS2_PCLK), //input clka
-        .cea(video_de && clockEnable  && pixel_x <1024), //input cea
-        .reseta(!PS2_VSYNC), //input reseta
-        .clkb(sdram_clk), //input clkb  
-        .ceb(fifoRdEn), //input ceb
-        .resetb(1'b0), //input resetb
-        .oce(1'b1), //input oce
-        .ada(pixel_x), //input [9:0] ada
-        .din({PS2_R[5:1],PS2_G,PS2_B[5:1]}),//PS2_G,PS2_B[5:1]}), //input [17:0] din
-        //.din(pixel_x),
-        .adb(writeXptr) //input [9:0] adb
-    );
+wire clockEnable;
 wire [11:0] frontPorch;
 wire [11:0] activePixels;
 wire [9:0] yStartMax;
@@ -536,77 +379,35 @@ mode_detector modedetect(
     .yStartMax,
     .yStopMin
 );
-reg[9:0] yOffset;
-reg shouldRecheckYOffset;
-reg[9:0] lastActiveLine;
-reg[9:0] actualYLast;
-reg updatedStartModeChange;
-reg updatedEndModeChange;
-reg [2:0] oldMode;
-reg [2:0] frameDelay = 3'd5;
-always @(posedge PS2_PCLK) begin
-    halfpclk <= ~halfpclk;
-    oldMode <= activeMode;
-    
-    if(oldMode != activeMode) begin 
-        updatedStartModeChange <= 0;
-        updatedEndModeChange <= 0;
-        frameDelay <= 3'd7;
-        lastActiveLine <= 100;
-    end
+ps2_capture ps2_capture(
+    clk(PS2_PCLK),
+    .clockEnable,
 
-    if (clockEnable) begin
+    .ps2_r(PS2_R),
+    .ps2_g(PS2_G),
+    .ps2_b(PS2_B),
 
-        // New line
-        if (!prev_hs && PS2_HSYNC) begin
-            h_count <= 0;
-            pixel_x <= 0;
-            pixel_y <= pixel_y + 1'b1;
-            video_de <= 0;
-        end
-        else begin
-            h_count <= h_count + 1'b1;
+    .ps2_hsync(PS2_HSYNC),
+    .ps2_vsync(PS2_VSYNC),
 
-            // 62 clocks of back porch, then 704 active pixels
-            if ((h_count >= frontPorch) && (h_count < frontPorch + activePixels)) begin
-                video_de <= 1'b1;
-                pixel_x <= h_count - frontPorch;
-                if (PS2_R || PS2_G || PS2_B) lastActiveLine <= pixel_y;
-            end
-            else begin
-                video_de <= 1'b0;
-            end
-        end
 
-        // New frame
-        if (!prev_vs && PS2_VSYNC) begin
-            if(frameDelay > 0) frameDelay <= frameDelay - 3'd1;
-            pixel_y <= 0;
-            shouldRecheckYOffset <= 1;
-            if (!updatedEndModeChange && (frameDelay == 3'd0) ) begin 
-                updatedEndModeChange <= 1;
-                ySize <= 0;
-            end else if (((lastActiveLine - yOffset) > ySize) && (lastActiveLine >= yOffset)) begin 
-                ySize <= lastActiveLine - yOffset; 
-                y_step <= ((lastActiveLine - yOffset) * 1024) / 600;
-            end
-            actualYLast <= lastActiveLine;
-        end
+    .lineSaveClk(sdram_clk),
+    .lineSaveReq,
+    .lineToSaveYpos,
+    .lineSaveAck,
+    .lineSaveReadAddr,
+    .lineSaveReadData,
+    .lineSaveRdEn,
 
-        if(shouldRecheckYOffset&& (PS2_R || PS2_G || PS2_B)) begin 
-            if(!updatedStartModeChange ) begin 
-                yOffset <= pixel_y;
-                updatedStartModeChange <= 1;
-            end
-            if (pixel_y < yOffset) yOffset <= pixel_y;
-            //yOffset <= (pixel_y > yStartMax) ? yStartMax: pixel_y;
-            shouldRecheckYOffset <= 0;
-        end 
+    .activeMode,
+    .frontPorch,
+    .activePixels,
 
-        prev_hs <= PS2_HSYNC;
-        prev_vs <= PS2_VSYNC;
-    end
-end
+    .ySize,
+    .y_step
+
+); 
+
 
 
 
