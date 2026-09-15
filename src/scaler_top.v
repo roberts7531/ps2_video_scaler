@@ -22,7 +22,7 @@ module scaler_top (
     output wire        LCD_VSYNC,
     output wire        LCD_DE,
     output wire        LCD_PCLK,
-    output wire        LCD_BL,
+    output reg        LCD_BL,
 
     // SPI bus
     input wire        SPI_CS,
@@ -148,8 +148,17 @@ always @(posedge LCD_PCLK) begin
     end
 end
 
-assign LCD_BL = 1;
+localparam reg [6:0] backlight = 7'd3;
+reg [6:0] bl_counter;
 
+always @(posedge LCD_PCLK) begin
+    bl_counter <= bl_counter + 1'b1;
+
+    if (bl_counter >= backlight)
+        LCD_BL <= 1'b0;
+    else
+        LCD_BL <= 1'b1;
+end
 pll_lcd lcd_pll(
         .clkout(LCD_PCLK), //output clkout
         .clkin(clk27) //input clkin
@@ -179,14 +188,14 @@ always @(posedge LCD_PCLK) begin
     
     ackSync2 <= sdramReadAck;
     ackSync <= ackSync2;
-    if (h_pos == 1024) y_frac_d <= ((y_acc % 600) * 1024) / 600;
+    //if (h_pos == 1024) y_frac_d <= ((y_acc % 600) * 1024) / 600;
 
     case(lreq_state) 
         IDLE: begin 
             if (h_pos == 800) begin //oldDe && !LCD_DE) begin 
                 activeBuffer <= 0;
-                lineRequested <=  (y_acc/600) -1;//(v_pos + 10'd1);// * (ySize + 1))/600;
-                
+                //lineRequested <=  v_pos+1;//(y_acc/600) -1;
+                lineRequested <= y_acc[31:10] - 1;
 
                 sdramReadReq <= 1;
                 lreq_state <= READ1_ACK;
@@ -218,34 +227,20 @@ always @(posedge LCD_PCLK) begin
 
 end
 
-
 reg osd_pixel;
-reg [5:0] osd_y;
-reg [3:0] y_scale;
 
-wire [6:0] osd_x = h_pos[9:3];
+wire osd_active =
+    (h_pos >= 11'd880) && (h_pos < 11'd1008) &&
+    (v_pos >= 10'd520) && (v_pos < 10'd584);
 
-always @(posedge LCD_PCLK) begin
-    if (v_pos == 12 && h_pos == 0) begin
-        osd_y   <= 0;
-        y_scale <= 0;
-    end
-    else if (h_pos == 0 && v_pos > 12 && v_pos < 588) begin
-        if (y_scale == 8) begin
-            y_scale <= 0;
-            osd_y   <= osd_y + 1'b1;
-        end
-        else begin
-            y_scale <= y_scale + 1'b1;
-        end
-    end
-end
+wire [6:0] osd_x = h_pos[6:0];
+wire [5:0] osd_y = v_pos[5:0];
 
 always @(*) begin
-    if ((v_pos >= 12) && (v_pos < 588))
+    if (osd_active)
         osd_pixel = vram[{osd_y[5:3], 7'b0} + osd_x][osd_y[2:0]];
     else
-        osd_pixel = 1'b0; 
+        osd_pixel = 1'b0;
 end
 always @(posedge LCD_PCLK) begin
     if (LCD_DE) begin
@@ -257,6 +252,9 @@ always @(posedge LCD_PCLK) begin
             LCD_R <= {r_final[14:10], 1'b0};
             LCD_G <= g_final[15:10];
             LCD_B <= {b_final[14:10], 1'b0};
+            //LCD_R <= osd_pixel ? 6'h3f : 8'd0;//{screenData[15:11], 1'b0};
+            //LCD_G <= osd_pixel ? 6'h3f : 8'd0;//screenData[10:5];
+             //LCD_B <= {screenData[4:0], 1'b0};
         end
     end
 end
@@ -315,6 +313,7 @@ wire [15:0] screenData3;
 wire [15:0] screenData4;
 reg [31:0] x_acc;
 reg [31:0] y_acc;
+reg [31:0] y_step;
 always @(posedge LCD_PCLK) begin 
     if (!LCD_DE) x_acc <= 0;
     else x_acc <= x_acc + activePixels;
@@ -323,14 +322,15 @@ always @(posedge LCD_PCLK) begin
     if (v_pos == 634)
         y_acc <= 0;
     else
-        y_acc <= y_acc + ySize;
+        y_acc <= y_acc + y_step;
+
+    
 end
 end
 
 reg [9:0] frac_d;
-reg [9:0] y_frac_d;
+wire [9:0] y_frac_d = y_acc[9:0];
 
-//wire [9:0] y_frac = 
 
 always @(posedge LCD_PCLK) begin
     frac_d   <= x_acc[9:0];
@@ -520,22 +520,40 @@ ps2_line_ram line_ram_ps2(
     );
 wire [11:0] frontPorch;
 wire [11:0] activePixels;
+wire [9:0] yStartMax;
+wire [9:0] yStopMin;
+wire [2:0] activeMode;
 mode_detector modedetect(
     .clk(PS2_PCLK),
     
     .hsync(PS2_HSYNC),
     .vsync(PS2_VSYNC),
     
-    //.activeMode,
+    .activeMode,
     .clockEnable,
     .frontPorch,
-    .activePixels
+    .activePixels,
+    .yStartMax,
+    .yStopMin
 );
 reg[9:0] yOffset;
 reg shouldRecheckYOffset;
 reg[9:0] lastActiveLine;
+reg[9:0] actualYLast;
+reg updatedStartModeChange;
+reg updatedEndModeChange;
+reg [2:0] oldMode;
+reg [2:0] frameDelay = 3'd5;
 always @(posedge PS2_PCLK) begin
     halfpclk <= ~halfpclk;
+    oldMode <= activeMode;
+    
+    if(oldMode != activeMode) begin 
+        updatedStartModeChange <= 0;
+        updatedEndModeChange <= 0;
+        frameDelay <= 3'd7;
+        lastActiveLine <= 100;
+    end
 
     if (clockEnable) begin
 
@@ -562,13 +580,26 @@ always @(posedge PS2_PCLK) begin
 
         // New frame
         if (!prev_vs && PS2_VSYNC) begin
+            if(frameDelay > 0) frameDelay <= frameDelay - 3'd1;
             pixel_y <= 0;
             shouldRecheckYOffset <= 1;
-            ySize <= lastActiveLine - yOffset;
+            if (!updatedEndModeChange && (frameDelay == 3'd0) ) begin 
+                updatedEndModeChange <= 1;
+                ySize <= 0;
+            end else if (((lastActiveLine - yOffset) > ySize) && (lastActiveLine >= yOffset)) begin 
+                ySize <= lastActiveLine - yOffset; 
+                y_step <= ((lastActiveLine - yOffset) * 1024) / 600;
+            end
+            actualYLast <= lastActiveLine;
         end
 
         if(shouldRecheckYOffset&& (PS2_R || PS2_G || PS2_B)) begin 
-            yOffset <= pixel_y;
+            if(!updatedStartModeChange ) begin 
+                yOffset <= pixel_y;
+                updatedStartModeChange <= 1;
+            end
+            if (pixel_y < yOffset) yOffset <= pixel_y;
+            //yOffset <= (pixel_y > yStartMax) ? yStartMax: pixel_y;
             shouldRecheckYOffset <= 0;
         end 
 

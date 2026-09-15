@@ -16,7 +16,9 @@ module mode_detector (
     output logic [2:0] activeMode,
     output logic clockEnable,
     output logic [11:0] frontPorch,
-    output logic [11:0] activePixels
+    output logic [11:0] activePixels,
+    output logic [9:0] yStartMax,
+    output logic [9:0] yStopMin
 ); 
 
 
@@ -49,6 +51,8 @@ always_comb begin
         clockEnable = ceEvery2;
         frontPorch = 12'd61;
         activePixels = 12'd704;
+        yStartMax = 10'd40;
+        yStopMin = 10'd496;
     end
     MODE_576P: begin
         clockEnable = ceEvery2;
@@ -74,6 +78,8 @@ always_comb begin
         clockEnable = 1'b0;
         frontPorch = 12'd61;
         activePixels = 12'd704;
+        yStartMax = 12'd0;
+        yStopMin = 12'd600;
     end
 
     endcase
